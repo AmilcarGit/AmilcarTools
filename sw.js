@@ -1,4 +1,4 @@
-const CACHE_NAME = 'amilcartools-v10';
+const CACHE_NAME = 'amilcartools-v11';
 const ASSETS = ['./', './index.html', './src/styles.css', './src/app.js', './src/advanced-tools.js', './src/extra-tools.js', './src/menu.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
