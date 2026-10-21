@@ -15,7 +15,7 @@ test('las cinco herramientas avanzadas están enlazadas y documentadas', () => {
     assert.ok(readme.toLowerCase().includes(tool === 'images' ? 'imágenes' : tool === 'editor' ? 'editor html/css/js' : tool === 'diff' ? 'comparador' : tool === 'qr' ? 'códigos qr' : 'markdown'));
   }
   assert.match(html, /src\/advanced-tools\.js/);
-  assert.match(sw, /amilcartools-v3/);
+  assert.match(sw, /amilcartools-v4/);
   assert.match(sw, /src\/advanced-tools\.js/);
 });
 
