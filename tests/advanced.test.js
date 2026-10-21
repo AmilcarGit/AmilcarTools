@@ -25,6 +25,6 @@ test('las funciones nuevas procesan en el navegador y no declaran APIs externas'
   assert.match(js, /function qr\(/);
   assert.match(js, /function diff\(/);
   assert.match(js, /function markdown\(/);
-  assert.match(js, /sandbox="allow-scripts"/);
+  assert.match(fs.readFileSync(path.join(root, 'index.html'), 'utf8'), /sandbox="allow-scripts"/);
   assert.doesNotMatch(js, /fetch\s*\(|XMLHttpRequest|https:\/\//);
 });
