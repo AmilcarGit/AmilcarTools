@@ -18,6 +18,11 @@
 - **Colores:** elegir HEX, ver RGB/HSL y calcular el contraste aproximado con blanco y negro.
 - **Regex:** probar expresiones regulares, flags, coincidencias, índices y grupos.
 - **Tiempo Unix:** convertir fecha local a segundos/milisegundos y timestamps a fecha local/UTC.
+- **Editor HTML/CSS/JS:** escribir código y ejecutarlo en una vista previa aislada del resto de la aplicación.
+- **Imágenes:** convertir entre WebP, JPEG y PNG, ajustar calidad y redimensionar archivos de hasta 25 MB.
+- **Códigos QR:** generar y descargar QR como SVG, con codificación local para textos de hasta 106 bytes UTF-8.
+- **Comparador de textos/código:** mostrar líneas añadidas, eliminadas y sin cambios.
+- **Editor Markdown:** vista previa de títulos, listas, enlaces, énfasis y bloques de código, además de descargar archivos .md.
 
 ### Uso
 
@@ -54,6 +59,11 @@ MIT. Consulta [`LICENSE`](LICENSE).
 - **Colors:** choose HEX, view RGB/HSL, and calculate contrast against white and black.
 - **Regex tester:** test patterns, flags, matches, indexes, and capture groups.
 - **Unix time:** convert local dates to seconds/milliseconds and timestamps to local/UTC dates.
+- **HTML/CSS/JS editor:** edit code and run it in a sandboxed preview iframe.
+- **Image converter:** convert WebP, JPEG and PNG, adjust quality and resize images up to 25 MB.
+- **QR generator:** create and download QR codes as SVG locally (up to 106 UTF-8 bytes).
+- **Text/code diff:** show added, removed and unchanged lines.
+- **Markdown editor:** preview headings, lists, links, emphasis and code blocks, and download .md files.
 
 ### Run it
 
