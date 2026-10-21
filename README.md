@@ -45,7 +45,7 @@ Las categorías son **Herramientas básicas**, **Código y desarrollo**, **Texto
 - **Fecha y Unix:** convierte fechas locales y timestamps.
 
 #### Código y desarrollo
-- **Editor HTML/CSS/JavaScript:** permite escribir código y verlo en una vista previa aislada.
+- **Editor HTML/CSS/JS:** permite escribir código y verlo en una vista previa aislada.
 - **XML ↔ JSON:** convierte estructuras compatibles entre ambos formatos.
 - **Formateador SQL:** mejora la legibilidad de consultas habituales.
 - **Validador HTML e inspector JavaScript:** detectan algunos errores frecuentes.
