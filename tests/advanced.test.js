@@ -21,6 +21,7 @@ test('las cinco herramientas avanzadas están enlazadas y documentadas', () => {
 
 test('las funciones nuevas procesan en el navegador y no declaran APIs externas', () => {
   const js = fs.readFileSync(path.join(root, 'src/advanced-tools.js'), 'utf8');
+  assert.match(js, /^\(function \(\) \{/);
   assert.match(js, /canvas\.toBlob/);
   assert.match(js, /function qr\(/);
   assert.match(js, /function diff\(/);
