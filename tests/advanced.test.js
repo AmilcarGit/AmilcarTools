@@ -29,3 +29,20 @@ test('las funciones nuevas procesan en el navegador y no declaran APIs externas'
   assert.match(fs.readFileSync(path.join(root, 'index.html'), 'utf8'), /sandbox="allow-scripts"/);
   assert.doesNotMatch(js, /fetch\s*\(|XMLHttpRequest|https:\/\//);
 });
+
+test('las cinco herramientas nuevas tienen botones, renderizado y acciones', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const js = fs.readFileSync(path.join(root, 'src/advanced-tools.js'), 'utf8');
+  for (const tool of ['csv', 'jwt', 'html', 'list', 'css']) {
+    assert.match(html, new RegExp('data-advanced-tool="' + tool + '"'));
+    assert.ok(js.includes(tool + ':['), 'Falta renderizado para ' + tool);
+  }
+  for (const action of ['csv-convert', 'jwt-decode', 'html-convert', 'list-process', 'css-format']) {
+    assert.ok(js.includes("'" + action + "'"), 'Falta acción ' + action);
+  }
+  assert.match(js, /function parseCsv\(/);
+  assert.match(js, /function toCsv\(/);
+  assert.match(js, /function decodeBase64Url\(/);
+  assert.match(js, /function cssTransform\(/);
+  assert.match(sw, /amilcartools-v5/);
+});
