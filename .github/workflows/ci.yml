@@ -23,5 +23,9 @@ jobs:
         run: node --check src/advanced-tools.js
       - name: Comprobar sintaxis de herramientas extra
         run: node --check src/extra-tools.js
+      - name: Comprobar sintaxis del menú
+        run: node --check src/menu.js
+      - name: Comprobar sintaxis del service worker
+        run: node --check sw.js
       - name: Ejecutar pruebas de humo
         run: node --test tests/*.test.js
