@@ -103,3 +103,18 @@ test('Image Studio ofrece lotes, presets, límites y procesamiento local', () =>
   assert.match(readme, /not uploaded to a server/i);
   assert.match(html, /data-advanced-tool="images"/);
 });
+
+test('el menú mejora búsqueda, accesibilidad y controles de teclado', () => {
+  const menu = fs.readFileSync(path.join(root, 'src/menu.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8');
+  assert.match(menu, /normalize\(value\)/);
+  assert.match(menu, /menu-search-clear/);
+  assert.match(menu, /menu-result-count/);
+  assert.match(menu, /search\.focus\(\{preventScroll:true\}\)/);
+  assert.match(menu, /e\.key==='Escape'/);
+  assert.match(menu, /e\.key==='\/'/);
+  assert.match(menu, /lastFocused\.focus\(\)/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(css, /overscroll-behavior:contain/);
+  assert.match(css, /\.menu-search-clear/);
+});
