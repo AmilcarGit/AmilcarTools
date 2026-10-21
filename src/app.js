@@ -7,7 +7,11 @@ const tools = {
   password: { kicker: 'HERRAMIENTA 03', title: 'Generador de contraseñas', description: 'Crea contraseñas aleatorias localmente con opciones personalizables.' },
   base64: { kicker: 'HERRAMIENTA 04', title: 'Codificador Base64', description: 'Codifica o decodifica texto usando compatibilidad Unicode.' },
   url: { kicker: 'HERRAMIENTA 05', title: 'Codificador de URL', description: 'Codifica o decodifica componentes de URL.' },
-  hash: { kicker: 'HERRAMIENTA 06', title: 'Generador SHA-256', description: 'Calcula el hash SHA-256 del texto introducido en tu dispositivo.' }
+  hash: { kicker: 'HERRAMIENTA 06', title: 'Generador SHA-256', description: 'Calcula el hash SHA-256 del texto introducido en tu dispositivo.' },
+  uuid: { kicker: 'HERRAMIENTA 07', title: 'Generador UUID', description: 'Crea identificadores únicos aleatorios directamente en tu navegador.' },
+  color: { kicker: 'HERRAMIENTA 08', title: 'Conversor de colores', description: 'Convierte colores HEX a RGB y HSL y revisa el contraste.' },
+  regex: { kicker: 'HERRAMIENTA 09', title: 'Probador de expresiones regulares', description: 'Prueba patrones regex con texto de ejemplo, sin enviar datos.' },
+  timestamp: { kicker: 'HERRAMIENTA 10', title: 'Conversor de tiempo Unix', description: 'Convierte fechas a timestamps y timestamps a fechas locales y UTC.' }
 };
 function setFeedback(message = '', error = false) { feedback.textContent = message; feedback.classList.toggle('error', error); }
 function setTool(name) {
@@ -17,6 +21,7 @@ function setTool(name) {
   $('#tool-description').textContent = tools[name].description;
   setFeedback();
   renderTool(name);
+  if (name === 'color') updateColor();
 }
 function renderTool(name) {
   if (name === 'text') panel.innerHTML = `<label class="field-label" for="text-input">Tu texto <small>El análisis se actualiza mientras escribes</small></label><textarea id="text-input" placeholder="Escribe o pega aquí tu texto…"></textarea><div class="stats-grid"><div class="stat"><strong id="characters">0</strong><span>Caracteres</span></div><div class="stat"><strong id="no-spaces">0</strong><span>Sin espacios</span></div><div class="stat"><strong id="words">0</strong><span>Palabras</span></div><div class="stat"><strong id="lines">0</strong><span>Líneas</span></div></div><div class="control-row"><button class="btn" data-action="upper">MAYÚSCULAS</button><button class="btn" data-action="lower">minúsculas</button><button class="btn" data-action="trim">Quitar espacios extra</button><button class="btn" data-action="copy-text">Copiar texto</button><button class="btn" data-action="clear-text">Limpiar</button></div>`;
@@ -25,6 +30,10 @@ function renderTool(name) {
   if (name === 'base64') panel.innerHTML = `<label class="field-label" for="base64-input">Texto de entrada</label><textarea id="base64-input" placeholder="Escribe el texto que quieres codificar o decodificar…"></textarea><div class="control-row"><button class="btn primary" data-action="encode-base64">Codificar → Base64</button><button class="btn" data-action="decode-base64">Decodificar ← Base64</button><button class="btn" data-action="copy-base64">Copiar resultado</button></div><label class="field-label" for="base64-output" style="margin-top:18px">Resultado</label><textarea id="base64-output" readonly placeholder="El resultado aparecerá aquí…"></textarea>`;
   if (name === 'url') panel.innerHTML = `<label class="field-label" for="url-input">Texto o componente de URL</label><textarea id="url-input" placeholder="Ejemplo: hola mundo & café"></textarea><div class="control-row"><button class="btn primary" data-action="encode-url">Codificar</button><button class="btn" data-action="decode-url">Decodificar</button><button class="btn" data-action="copy-url">Copiar resultado</button></div><label class="field-label" for="url-output" style="margin-top:18px">Resultado</label><textarea id="url-output" readonly placeholder="El resultado aparecerá aquí…"></textarea>`;
   if (name === 'hash') panel.innerHTML = `<label class="field-label" for="hash-input">Texto para calcular su hash</label><textarea id="hash-input" placeholder="Escribe o pega el texto…"></textarea><div class="control-row"><button class="btn primary" data-action="make-hash">Calcular SHA-256</button><button class="btn" data-action="copy-hash">Copiar hash</button></div><label class="field-label" for="hash-output" style="margin-top:18px">SHA-256 hexadecimal</label><div id="hash-output" class="result-box" aria-live="polite">El hash aparecerá aquí…</div>`;
+  if (name === 'uuid') panel.innerHTML = `<label class="field-label" for="uuid-output">Identificador UUID v4 <small>Generación criptográficamente segura</small></label><textarea id="uuid-output" rows="3" readonly placeholder="Pulsa Generar UUID"></textarea><div class="control-row"><button class="btn primary" data-action="generate-uuid">Generar UUID</button><button class="btn" data-action="generate-uuids">Generar 10</button><button class="btn" data-action="copy-uuid">Copiar</button></div><p style="font-size:11px;color:var(--muted);line-height:1.6">Los UUID sirven como identificadores; no son contraseñas ni secretos de autenticación.</p>`;
+  if (name === 'color') panel.innerHTML = `<label class="field-label" for="color-picker">Elige un color</label><div class="color-row"><input id="color-picker" type="color" value="#a99bff" aria-label="Selector de color"><input id="color-hex" type="text" value="#a99bff" maxlength="7" spellcheck="false" aria-label="Color hexadecimal"></div><div class="color-preview" id="color-preview"><span>Vista previa</span></div><div class="stats-grid"><div class="stat"><strong id="color-rgb">169, 155, 255</strong><span>RGB</span></div><div class="stat"><strong id="color-hsl">248°, 100%, 80%</strong><span>HSL</span></div><div class="stat"><strong id="color-contrast">—</strong><span>Contraste con blanco</span></div><div class="stat"><strong id="color-contrast-dark">—</strong><span>Contraste con negro</span></div></div><div class="control-row"><button class="btn" data-action="copy-hex">Copiar HEX</button><button class="btn" data-action="copy-rgb">Copiar RGB</button><button class="btn" data-action="copy-hsl">Copiar HSL</button></div>`;
+  if (name === 'regex') panel.innerHTML = `<label class="field-label" for="regex-pattern">Expresión regular <small>Sin barras / /</small></label><input id="regex-pattern" type="text" value="\\b\\w+\\b" placeholder="Ej. \\d+" spellcheck="false"><div class="options"><label>Flags <input id="regex-flags" type="text" value="gi" maxlength="6" spellcheck="false" style="width:72px"></label><span>Flags comunes: g, i, m, s, u</span></div><label class="field-label" for="regex-text" style="margin-top:16px">Texto de prueba</label><textarea id="regex-text" placeholder="Escribe aquí el texto donde buscar coincidencias…">Hola mundo. Hola AmilcarTools 123.</textarea><div class="control-row"><button class="btn primary" data-action="test-regex">Probar expresión</button><button class="btn" data-action="copy-regex">Copiar coincidencias</button></div><label class="field-label" for="regex-output" style="margin-top:18px">Coincidencias</label><div id="regex-output" class="result-box" aria-live="polite">El resultado aparecerá aquí…</div>`;
+  if (name === 'timestamp') panel.innerHTML = `<label class="field-label" for="date-input">Fecha y hora local</label><input id="date-input" type="datetime-local"><div class="control-row"><button class="btn primary" data-action="date-to-timestamp">Convertir fecha</button></div><div class="two-col" style="margin-top:18px"><div><label class="field-label" for="timestamp-seconds">Timestamp en segundos</label><input id="timestamp-seconds" type="number" placeholder="Ej. 1735689600"></div><div><label class="field-label" for="timestamp-ms">Timestamp en milisegundos</label><input id="timestamp-ms" type="number" placeholder="Ej. 1735689600000"></div></div><div class="control-row"><button class="btn" data-action="timestamp-to-date">Convertir timestamp</button><button class="btn" data-action="timestamp-now">Usar ahora</button></div><label class="field-label" style="margin-top:18px">Fecha interpretada</label><div id="timestamp-output" class="result-box" aria-live="polite">La fecha aparecerá aquí…</div>`;
   if (name === 'text') updateTextStats();
 }
 function updateTextStats() {
@@ -44,6 +53,42 @@ function randomPassword(length, sets) {
   while (result.length < length) result.push(all[randomIndex(all.length)]);
   for (let i = result.length - 1; i > 0; i--) { const j = randomIndex(i + 1); [result[i], result[j]] = [result[j], result[i]]; }
   return result.join('');
+}
+function createUuid() {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+function updateColor() {
+  const hexInput = $('#color-hex'); const picker = $('#color-picker');
+  if (!hexInput || !picker) return;
+  const hex = hexInput.value.trim().replace(/^#/, '');
+  if (!/^[0-9a-fA-F]{6}$/.test(hex)) { hexInput.setAttribute('aria-invalid', 'true'); return; }
+  hexInput.removeAttribute('aria-invalid');
+  const normalized = `#${hex.toLowerCase()}`; picker.value = normalized;
+  const values = [0, 2, 4].map(index => parseInt(hex.slice(index, index + 2), 16));
+  const [r, g, b] = values.map(value => value / 255);
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), delta = max - min;
+  let h = 0, s = 0; const l = (max + min) / 2;
+  if (delta) {
+    s = delta / (1 - Math.abs(2 * l - 1));
+    if (max === r) h = 60 * (((g - b) / delta) % 6);
+    else if (max === g) h = 60 * ((b - r) / delta + 2);
+    else h = 60 * ((r - g) / delta + 4);
+  }
+  h = (h + 360) % 360;
+  const rgbText = values.join(', ');
+  const hslText = `${Math.round(h)}°, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
+  const luminance = values.map(value => { const c = value / 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; }).reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
+  const contrastWhite = 1.05 / (luminance + 0.05);
+  const contrastBlack = (luminance + 0.05) / 0.05;
+  $('#color-rgb').textContent = rgbText; $('#color-hsl').textContent = hslText;
+  $('#color-contrast').textContent = contrastWhite.toFixed(2) + ':1'; $('#color-contrast-dark').textContent = contrastBlack.toFixed(2) + ':1';
+  $('#color-preview').style.background = normalized;
+  $('#color-preview').style.color = luminance > 0.42 ? '#111' : '#fff';
 }
 async function copyText(value) {
   if (!value) throw new Error('No hay contenido para copiar.');
@@ -81,11 +126,48 @@ async function runAction(action) {
       case 'copy-url': await copyText(read('#url-output')); break;
       case 'make-hash': { if (!crypto.subtle) throw new Error('Web Crypto no está disponible. Abre esta página mediante HTTPS o localhost.'); const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(read('#hash-input'))); $('#hash-output').textContent = Array.from(new Uint8Array(bytes), b => b.toString(16).padStart(2, '0')).join(''); setFeedback('Hash calculado localmente.'); break; }
       case 'copy-hash': await copyText($('#hash-output').textContent === 'El hash aparecerá aquí…' ? '' : $('#hash-output').textContent); break;
+      case 'generate-uuid': write('#uuid-output', createUuid()); setFeedback('UUID generado localmente.'); break;
+      case 'generate-uuids': write('#uuid-output', Array.from({ length: 10 }, createUuid).join('\n')); setFeedback('Se generaron 10 UUID.'); break;
+      case 'copy-uuid': await copyText(read('#uuid-output')); break;
+      case 'copy-hex': await copyText(read('#color-hex').toUpperCase()); break;
+      case 'copy-rgb': await copyText($('#color-rgb').textContent); break;
+      case 'copy-hsl': await copyText($('#color-hsl').textContent); break;
+      case 'test-regex': {
+        const pattern = read('#regex-pattern'); const flags = read('#regex-flags');
+        if (/[^dgimsuvy]/.test(flags) || new Set(flags).size !== flags.length) throw new Error('Las flags contienen caracteres no válidos o repetidos.');
+        const regex = new RegExp(pattern, flags); const input = read('#regex-text'); const matches = Array.from(input.matchAll(new RegExp(regex.source, flags.includes('g') ? flags : flags + 'g')));
+        $('#regex-output').textContent = matches.length ? matches.map((match, index) => `${index + 1}. "${match[0]}" — índice ${match.index}${match.length > 1 ? ` — grupos: ${match.slice(1).join(', ')}` : ''}`).join('\n') : 'No se encontraron coincidencias.';
+        setFeedback(`${matches.length} coincidencia(s).`); break;
+      }
+      case 'copy-regex': await copyText($('#regex-output').textContent === 'El resultado aparecerá aquí…' ? '' : $('#regex-output').textContent); break;
+      case 'date-to-timestamp': {
+        const value = read('#date-input'); if (!value) throw new Error('Elige una fecha y hora.');
+        const date = new Date(value); if (Number.isNaN(date.getTime())) throw new Error('La fecha no es válida.');
+        write('#timestamp-seconds', Math.floor(date.getTime() / 1000)); write('#timestamp-ms', date.getTime());
+        $('#timestamp-output').textContent = `Local: ${date.toLocaleString()}\nUTC: ${date.toISOString()}`; setFeedback('Fecha convertida.'); break;
+      }
+      case 'timestamp-to-date': {
+        const seconds = read('#timestamp-seconds'); const millis = read('#timestamp-ms');
+        const value = millis !== '' ? Number(millis) : Number(seconds) * 1000;
+        if ((millis === '' && seconds === '') || !Number.isFinite(value)) throw new Error('Introduce un timestamp válido en segundos o milisegundos.');
+        const date = new Date(value); if (Number.isNaN(date.getTime())) throw new Error('El timestamp está fuera del rango admitido.');
+        write('#date-input', new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
+        $('#timestamp-output').textContent = `Local: ${date.toLocaleString()}\nUTC: ${date.toISOString()}\nISO: ${date.toISOString()}`; setFeedback('Timestamp convertido.'); break;
+      }
+      case 'timestamp-now': {
+        const date = new Date(); write('#date-input', new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
+        write('#timestamp-seconds', Math.floor(date.getTime() / 1000)); write('#timestamp-ms', date.getTime());
+        $('#timestamp-output').textContent = `Local: ${date.toLocaleString()}\nUTC: ${date.toISOString()}`; setFeedback('Hora actual cargada.'); break;
+      }
     }
   } catch (error) { setFeedback(error.message || 'No se pudo procesar el contenido.', true); }
 }
 document.querySelectorAll('.tab').forEach(button => button.addEventListener('click', () => setTool(button.dataset.tool)));
-panel.addEventListener('input', event => { if (event.target.id === 'text-input') updateTextStats(); });
+panel.addEventListener('input', event => {
+  if (event.target.id === 'text-input') updateTextStats();
+  if (event.target.id === 'color-picker' && $('#color-hex')) { $('#color-hex').value = event.target.value; updateColor(); }
+  if (event.target.id === 'color-hex') updateColor();
+});
 panel.addEventListener('click', event => { const button = event.target.closest('[data-action]'); if (button) runAction(button.dataset.action); });
 setTool('text');
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
