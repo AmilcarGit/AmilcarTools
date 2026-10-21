@@ -13,3 +13,4 @@
 .advanced-panel select{max-width:220px;width:auto;min-width:150px}
 .advanced-panel .options label{display:flex;align-items:center;gap:7px}
 .advanced-panel .options input[type=checkbox]{width:auto;accent-color:var(--accent)}
+.gradient-preview{height:120px;border:1px solid #ffffff33;border-radius:14px}.adv-tab[aria-pressed="true"]{color:#fff;background:#8d7aff40;border-color:#a99bff45}
