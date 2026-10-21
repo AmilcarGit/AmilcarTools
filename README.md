@@ -29,6 +29,7 @@
 - **Limpiador de listas:** recorta espacios, elimina líneas vacías y duplicados, y ordena elementos.
 - **Formateador CSS:** embellece o minifica CSS habitual sin enviar código a servidores.
 - **XML ↔ JSON, SQL, validador HTML e inspector JavaScript:** conversión y comprobaciones locales.
+- **Menú hamburguesa:** herramientas agrupadas por categorías para encontrarlas con facilidad.
 - **Regex PRO, paletas, degradados y Lorem Ipsum:** patrones, colores y texto de prueba.
 - **Hashes avanzados, TOTP y analizador de contraseñas:** procesamiento local y evaluación orientativa.
 - **Contador/comparador PRO, limpiador CSV y validador JSON Schema:** utilidades de texto y datos.
