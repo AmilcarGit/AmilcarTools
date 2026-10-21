@@ -33,6 +33,7 @@ test('las funciones nuevas procesan en el navegador y no declaran APIs externas'
 test('las cinco herramientas nuevas tienen botones, renderizado y acciones', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const js = fs.readFileSync(path.join(root, 'src/advanced-tools.js'), 'utf8');
+  const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   for (const tool of ['csv', 'jwt', 'html', 'list', 'css']) {
     assert.match(html, new RegExp('data-advanced-tool="' + tool + '"'));
     assert.ok(js.includes(tool + ':['), 'Falta renderizado para ' + tool);
@@ -52,3 +53,35 @@ test('24 herramientas adicionales enlazadas y con procesadores',()=>{const h=fs.
 test('el generador QR permite elegir colores locales',()=>{const js=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8');assert.match(js,/id="qr-fg" type="color"/);assert.match(js,/id="qr-bg" type="color"/);assert.match(js,/qrSvg\(qr\(v\)\)\.replace/)});
 
 test('menú hamburguesa organiza herramientas y elimina botones duplicados',()=>{const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),m=fs.readFileSync(path.join(root,'src/menu.js'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(h,/id="menu-toggle"/);assert.match(h,/id="tool-menu"/);assert.match(h,/src\/menu\.js/);for(const group of ['Código y desarrollo','Texto y datos','Diseño e imágenes','Seguridad y utilidades'])assert.ok(m.includes(group));assert.match(sw,/amilcartools-v8/);assert.match(sw,/src\/menu\.js/);for(const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"])assert.equal((h.match(new RegExp('data-extra-tool="'+id+'"','g'))||[]).length,1,'Botón duplicado o ausente: '+id)});
+
+test('el menú incluye búsqueda, favoritos e historial local', () => {
+  const menu = fs.readFileSync(path.join(root, 'src/menu.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8');
+  assert.match(menu, /type="search"/);
+  assert.match(menu, /data-menu-filter="favorites"/);
+  assert.match(menu, /amilcartools-menu-v2/);
+  assert.match(menu, /recent/);
+  assert.match(menu, /localStorage/);
+  assert.match(css, /\.menu-search/);
+  assert.match(css, /\.menu-favorite/);
+});
+
+test('cada herramienta adicional está en el menú y tiene un procesador', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const menu = fs.readFileSync(path.join(root, 'src/menu.js'), 'utf8');
+  const js = fs.readFileSync(path.join(root, 'src/extra-tools.js'), 'utf8');
+  for (const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"]) {
+    assert.match(html, new RegExp('data-extra-tool="' + id + '"'));
+    assert.ok(menu.includes("['" + id + "'"), 'Falta en el menú: ' + id);
+    assert.ok(js.includes("case '" + id + "'"), 'Falta procesador: ' + id);
+  }
+});
+
+test('el parser CSV admite comas y comillas escapadas y el conversor XML conserva estructuras', () => {
+  const js = fs.readFileSync(path.join(root, 'src/extra-tools.js'), 'utf8');
+  assert.match(js, /if\(c==='"'&&s\[i\+1\]==='"'\)/);
+  assert.match(js, /campo entre comillas sin cerrar/);
+  assert.match(js, /@attributes/);
+  assert.match(js, /Nombre XML no válido/);
+  assert.match(js, /scripts, eventos o enlaces peligrosos/);
+});
