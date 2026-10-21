@@ -161,6 +161,11 @@ python -m http.server 8000
 Then visit http://localhost:8000. No npm installation, database or backend is required. Some browser APIs and PWA features require HTTPS or localhost.
 
 
+
+### Menu and navigation
+
+The tools menu supports accent-insensitive search, live result counts, category grouping, favorites and recent tools stored locally in the browser. The search can be cleared with one tap; Escape closes the menu, the slash key focuses search when appropriate, and focus returns to the previous control after closing. The layout includes mobile adjustments and reduced-motion preferences.
+
 ### Image Studio
 
 The image tool works locally in your browser and supports WebP, JPEG and PNG export, quality adjustment, maximum dimensions that preserve aspect ratio, presets for square posts, stories/statuses, landscape images and social posts, and batch processing for up to 20 images (25 MB per file). Each processed file gets its own download link; files are not uploaded to a server. Animated GIFs are exported as a static image. Browser support for formats may vary.
