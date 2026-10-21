@@ -44,5 +44,7 @@ test('las cinco herramientas nuevas tienen botones, renderizado y acciones', () 
   assert.match(js, /function toCsv\(/);
   assert.match(js, /function decodeBase64Url\(/);
   assert.match(js, /function cssTransform\(/);
-  assert.match(sw, /amilcartools-v5/);
+  assert.match(sw, /amilcartools-v6/);
 });
+
+test('24 herramientas adicionales enlazadas y con procesadores',()=>{const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),j=fs.readFileSync(path.join(root,'src/extra-tools.js'),'utf8');for(const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"]){assert.match(h,new RegExp('data-extra-tool="'+id+'"'));assert.ok(j.includes("'"+id+"'"))}assert.match(j,/async function run/);assert.match(sw,/amilcartools-v6/);assert.match(sw,/src\/extra-tools\.js/)});
