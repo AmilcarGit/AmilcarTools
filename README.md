@@ -14,6 +14,10 @@
 - **Base64:** codificación y decodificación compatible con texto Unicode.
 - **URL:** codificar y decodificar componentes de URL.
 - **SHA-256:** generar el hash de texto con Web Crypto.
+- **UUID v4:** generar uno o diez identificadores únicos mediante el generador criptográfico del navegador.
+- **Colores:** elegir HEX, ver RGB/HSL y calcular el contraste aproximado con blanco y negro.
+- **Regex:** probar expresiones regulares, flags, coincidencias, índices y grupos.
+- **Tiempo Unix:** convertir fecha local a segundos/milisegundos y timestamps a fecha local/UTC.
 
 ### Uso
 
@@ -46,6 +50,10 @@ MIT. Consulta [`LICENSE`](LICENSE).
 - **Base64:** encode and decode Unicode text.
 - **URL component:** encode and decode URL components.
 - **SHA-256:** hash text with the Web Crypto API.
+- **UUID v4:** generate one or ten random identifiers using the browser's cryptographic generator.
+- **Colors:** choose HEX, view RGB/HSL, and calculate contrast against white and black.
+- **Regex tester:** test patterns, flags, matches, indexes, and capture groups.
+- **Unix time:** convert local dates to seconds/milliseconds and timestamps to local/UTC dates.
 
 ### Run it
 
