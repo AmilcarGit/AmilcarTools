@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101321">
+  <meta name="description" content="Herramientas gratuitas, privadas y sin conexión para texto, JSON, contraseñas, Base64 y URLs.">
+  <title>AmilcarTools — herramientas privadas</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="AmilcarTools inicio"><span class="brand-mark">A</span><span>Amilcar<span class="brand-accent">Tools</span><small>UTILIDADES PRIVADAS</small></span></a>
+    <div class="privacy-pill"><span></span> Todo se procesa en tu dispositivo</div>
+  </header>
+  <main id="inicio">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> GRATIS · CÓDIGO ABIERTO · OFFLINE</div>
+      <h1>Herramientas útiles.<br><span>Sin complicaciones.</span></h1>
+      <p>Pequeñas utilidades para tus tareas diarias. Sin cuenta, sin anuncios y sin enviar tus datos a un servidor.</p>
+      <div class="hero-meta"><span>✦ Sin API externa</span><span>✦ Funciona sin conexión después de cargar</span><span>✦ Código abierto</span></div>
+    </section>
+    <nav class="tool-tabs" aria-label="Herramientas">
+      <button class="tab active" data-tool="text">Texto</button><button class="tab" data-tool="json">JSON</button><button class="tab" data-tool="password">Contraseñas</button><button class="tab" data-tool="base64">Base64</button><button class="tab" data-tool="url">URL</button><button class="tab" data-tool="hash">SHA-256</button>
+    </nav>
+    <section class="workspace">
+      <div class="workspace-heading"><div><div class="section-kicker" id="tool-kicker">HERRAMIENTA 01</div><h2 id="tool-title">Analizador de texto</h2><p id="tool-description">Cuenta caracteres, palabras y líneas al instante.</p></div><span class="local-tag">● LOCAL</span></div>
+      <div id="tool-panel" class="tool-panel"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+    </section>
+    <section class="feature-grid" aria-label="Ventajas">
+      <article><span class="feature-icon">⌁</span><h3>Privacidad primero</h3><p>El contenido se procesa en tu navegador. No tenemos una cuenta tuya ni un servidor que almacene tus datos.</p></article>
+      <article><span class="feature-icon">◉</span><h3>Lista para desconectarse</h3><p>Instálala como aplicación. Tras la primera carga, las funciones principales trabajan sin conexión.</p></article>
+      <article><span class="feature-icon">⌘</span><h3>Abierta para todos</h3><p>Licencia MIT, sin dependencias de ejecución y con código que puedes revisar, adaptar y compartir.</p></article>
+    </section>
+    <footer><div class="footer-brand">AMILCAR<span>TOOLS</span></div><p>Hecho para ser útil. Diseñado para respetar tu privacidad.</p><a href="https://github.com/AmilcarGit" target="_blank" rel="noopener noreferrer">Más proyectos de AmilcarGit ↗</a><small>El hash SHA-256 requiere soporte de Web Crypto en un contexto seguro (HTTPS o localhost).</small></footer>
+  </main>
+  <script src="src/app.js" defer></script>
+</body>
+</html>
