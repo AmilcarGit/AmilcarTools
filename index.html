@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101321">
-  <meta name="description" content="Herramientas gratuitas, privadas y sin conexión para texto, JSON, contraseñas, Base64, URLs, UUID, colores, regex y tiempo Unix.">
+  <meta name="description" content="Herramientas gratuitas y privadas para texto, código, imágenes, QR, Markdown y programación.">
   <title>AmilcarTools — herramientas privadas</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -30,6 +30,11 @@
       <div id="tool-panel" class="tool-panel"></div>
       <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
     </section>
+    <section class="advanced-workspace" id="advanced-tools" aria-labelledby="advanced-title">
+      <div class="workspace-heading"><div><div class="section-kicker">HERRAMIENTAS AVANZADAS</div><h2 id="advanced-title">Editor HTML/CSS/JS</h2><p id="advanced-description">Prueba código en una vista previa aislada.</p></div><span class="local-tag">● LOCAL</span></div>
+      <nav class="advanced-tabs" aria-label="Herramientas avanzadas"><button class="adv-tab active" data-advanced-tool="editor" aria-pressed="true">Editor de código</button><button class="adv-tab" data-advanced-tool="images" aria-pressed="false">Imágenes</button><button class="adv-tab" data-advanced-tool="qr" aria-pressed="false">Código QR</button><button class="adv-tab" data-advanced-tool="diff" aria-pressed="false">Comparar</button><button class="adv-tab" data-advanced-tool="markdown" aria-pressed="false">Markdown</button></nav>
+      <div id="advanced-panel" class="advanced-panel"></div><div id="advanced-feedback" class="feedback" role="status" aria-live="polite"></div>
+    </section>
     <section class="feature-grid" aria-label="Ventajas">
       <article><span class="feature-icon">⌁</span><h3>Privacidad primero</h3><p>El contenido se procesa en tu navegador. No tenemos una cuenta tuya ni un servidor que almacene tus datos.</p></article>
       <article><span class="feature-icon">◉</span><h3>Lista para desconectarse</h3><p>Instálala como aplicación. Tras la primera carga, las funciones principales trabajan sin conexión.</p></article>
@@ -38,5 +43,6 @@
     <footer><div class="footer-brand">AMILCAR<span>TOOLS</span></div><p>Hecho para ser útil. Diseñado para respetar tu privacidad.</p><a href="https://github.com/AmilcarGit" target="_blank" rel="noopener noreferrer">Más proyectos de AmilcarGit ↗</a><small>El hash SHA-256 requiere soporte de Web Crypto en un contexto seguro (HTTPS o localhost).</small></footer>
   </main>
   <script src="src/app.js" defer></script>
+  <script src="src/advanced-tools.js" defer></script>
 </body>
 </html>
