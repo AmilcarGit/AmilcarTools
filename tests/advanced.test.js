@@ -11,7 +11,7 @@ test('las cinco herramientas avanzadas están enlazadas y documentadas', () => {
   const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
   for (const tool of ['editor', 'images', 'qr', 'diff', 'markdown']) {
     assert.match(html, new RegExp('data-advanced-tool="' + tool + '"'));
-    assert.ok(js.includes("'" + tool + "'"), 'Falta la herramienta ' + tool);
+    assert.ok(js.includes(tool + ':['), 'Falta la herramienta ' + tool);
     assert.ok(readme.toLowerCase().includes(tool === 'images' ? 'imágenes' : tool === 'editor' ? 'editor html/css/js' : tool === 'diff' ? 'comparador' : tool === 'qr' ? 'códigos qr' : 'markdown'));
   }
   assert.match(html, /src\/advanced-tools\.js/);
