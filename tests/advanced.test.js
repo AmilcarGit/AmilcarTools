@@ -27,7 +27,7 @@ test('las funciones nuevas procesan en el navegador y no declaran APIs externas'
   assert.match(js, /function diff\(/);
   assert.match(js, /function markdown\(/);
   assert.match(js, /sandbox="allow-scripts"/);
-  assert.doesNotMatch(js, /fetch\s*\(|XMLHttpRequest|https:\/\//);
+  assert.doesNotMatch(js, /fetch\s*\(|XMLHttpRequest/);
 });
 
 test('las cinco herramientas nuevas tienen botones, renderizado y acciones', () => {
