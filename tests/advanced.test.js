@@ -85,3 +85,21 @@ test('el parser CSV admite comas y comillas escapadas y el conversor XML conserv
   assert.match(js, /Nombre XML no válido/);
   assert.match(js, /scripts, eventos o enlaces peligrosos/);
 });
+
+test('Image Studio ofrece lotes, presets, límites y procesamiento local', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const js = fs.readFileSync(path.join(root, 'src/advanced-tools.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8');
+  const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+  assert.match(js, /id="image-file"[^>]*multiple/);
+  assert.match(js, /id="image-preset"/);
+  assert.match(js, /image-batch/);
+  assert.match(js, /20 imágenes por lote/i);
+  assert.match(js, /createObjectURL/);
+  assert.match(js, /revokeObjectURL/);
+  assert.match(js, /toBlob/);
+  assert.match(css, /\.image-batch-row/);
+  assert.match(readme, /### Image Studio/);
+  assert.match(readme, /not uploaded to a server/i);
+  assert.match(html, /data-advanced-tool="images"/);
+});
