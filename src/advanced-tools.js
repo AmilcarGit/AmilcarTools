@@ -1,3 +1,6 @@
+(function () {
+'use strict';
+
 const root = document.getElementById('advanced-tools');
 const panel = document.getElementById('advanced-panel');
 const feedback = document.getElementById('advanced-feedback');
@@ -48,3 +51,5 @@ root.addEventListener('click',event=>{const tab=event.target.closest('[data-adva
  }}catch(e){message(e.message||'No se pudo completar la operación.',true);}});
 root.addEventListener('input',event=>{if(event.target.id==='image-file')loadImage(event.target.files&&event.target.files[0]);if(event.target.id==='image-quality')document.getElementById('image-quality-label').textContent=event.target.value+'%';if(event.target.id==='markdown-input')markdownPreview();});
 render('editor');
+
+})();
