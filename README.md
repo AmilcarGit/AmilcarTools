@@ -22,7 +22,7 @@
 - **Imágenes:** convertir entre WebP, JPEG y PNG, ajustar calidad y redimensionar archivos de hasta 25 MB.
 - **Códigos QR:** generar y descargar QR como SVG, con codificación local para textos de hasta 106 bytes UTF-8.
 - **Comparador de textos/código:** mostrar líneas añadidas, eliminadas y sin cambios.
-- **Editor Markdown:** vista previa de títulos, listas, enlaces, énfasis y bloques de código, además de descargar archivos .md.
+- **Editor Markdown:** vista previa de títulos, listas, enlaces, énfasis y bloques de código, además de descargar archivos .md.\n- **CSV ↔ JSON:** convierte CSV con encabezados a JSON y listas de objetos JSON a CSV.\n- **Decodificador JWT:** muestra la cabecera y el payload de un token sin verificar la firma.\n- **Codificador HTML:** escapa caracteres especiales y decodifica entidades HTML.\n- **Limpiador de listas:** recorta espacios, elimina líneas vacías y duplicados, y ordena elementos.\n- **Formateador CSS:** embellece o minifica CSS habitual sin enviar código a servidores.
 
 ### Uso
 
@@ -63,7 +63,7 @@ MIT. Consulta [`LICENSE`](LICENSE).
 - **Image converter:** convert WebP, JPEG and PNG, adjust quality and resize images up to 25 MB.
 - **QR generator:** create and download QR codes as SVG locally (up to 106 UTF-8 bytes).
 - **Text/code diff:** show added, removed and unchanged lines.
-- **Markdown editor:** preview headings, lists, links, emphasis and code blocks, and download .md files.
+- **Markdown editor:** preview headings, lists, links, emphasis and code blocks, and download .md files.\n- **CSV ↔ JSON:** convert CSV with headers to JSON and JSON object arrays to CSV.\n- **JWT decoder:** display a token header and payload without verifying its signature.\n- **HTML encoder:** escape special characters and decode HTML entities.\n- **List cleaner:** trim spaces, remove blank lines and duplicates, and sort items.\n- **CSS formatter:** pretty-print or minify common CSS locally.
 
 ### Run it
 
