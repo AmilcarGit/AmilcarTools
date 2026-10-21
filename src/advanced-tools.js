@@ -52,20 +52,22 @@ function markdown(source){const blocks=[];let t=esc(source).replace(/\r\n?/g,'\n
 
 function parseCsv(source){
  const rows=[];let row=[],field='',quoted=false;
- for(let i=0;i<source.length;i++){const c=source[i];if(quoted){if(c==='"'&&source[i+1]==='"'){field+='"';i++;}else if(c==='"')quoted=false;else field+=c;}else if(c==='"'&&field==='')quoted=true;else if(c===','){row.push(field);field='';}else if(c==='\\n'){row.push(field);rows.push(row);row=[];field='';}else if(c==='\\r'){if(source[i+1]==='\\n')i++;row.push(field);rows.push(row);row=[];field='';}else field+=c;}
+ for(let i=0;i<source.length;i++){const c=source[i];if(quoted){if(c==='"'&&source[i+1]==='"'){field+='"';i++;}else if(c==='"')quoted=false;else field+=c;}else if(c==='"'&&field==='')quoted=true;else if(c===','){row.push(field);field='';}else if(c==='\n'){row.push(field);rows.push(row);row=[];field='';}else if(c==='\r'){if(source[i+1]==='\n')i++;row.push(field);rows.push(row);row=[];field='';}else field+=c;}
  if(quoted)throw Error('CSV inválido: hay una comilla sin cerrar.');row.push(field);rows.push(row);
  while(rows.length&&rows[rows.length-1].length===1&&rows[rows.length-1][0]==='')rows.pop();
  if(!rows.length)throw Error('Introduce un CSV con encabezados.');const headers=rows.shift().map((v,i)=>v.trim()||'columna_'+(i+1));if(new Set(headers).size!==headers.length)throw Error('Los encabezados CSV deben ser únicos.');
  return rows.map(cells=>Object.fromEntries(headers.map((key,i)=>[key,cells[i]??''])));
 }
 function toCsv(rows){
- if(!Array.isArray(rows)||!rows.length||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw Error('JSON debe ser una lista de objetos.');const headers=[...new Set(rows.flatMap(r=>Object.keys(r)))];const cell=v=>{let s=v==null?'':typeof v==='object'?JSON.stringify(v):String(v);return /[",\\r\\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};return [headers.map(cell).join(','),...rows.map(r=>headers.map(h=>cell(r[h])).join(','))].join('\\r\\n');
+ if(!Array.isArray(rows)||!rows.length||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw Error('JSON debe ser una lista de objetos.');const headers=[...new Set(rows.flatMap(r=>Object.keys(r)))];const cell=v=>{let s=v==null?'':typeof v==='object'?JSON.stringify(v):String(v);return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};return [headers.map(cell).join(','),...rows.map(r=>headers.map(h=>cell(r[h])).join(','))].join('\r\n');
 }
 function decodeBase64Url(s){const b=s.replace(/-/g,'+').replace(/_/g,'/');const binary=atob(b+'='.repeat((4-b.length%4)%4));return new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(binary,c=>c.charCodeAt(0)));}
 function cssTransform(source,mode){
- let s=source.replace(/\\/\*[\\s\\S]*?\\*\\//g,'').trim();
- if(!s)throw Error('Introduce CSS.');if(mode==='minify')return s.replace(/\\s+/g,' ').replace(/\\s*([{}:;,>+~])\\s*/g,'$1').replace(/;}/g,'}').trim();
- s=s.replace(/\\s*\\{\\s*/g,' {\\n  ').replace(/;\\s*/g,';\\n  ').replace(/\\s*}\\s*/g,'\\n}\\n\\n').replace(/;\\n  }/g,'\\n}');return s.trim()+'\\n';
+ let s=source.replace(/\/\*[\s\S]*?\*\//g,'').trim();
+ if(!s)throw Error('Introduce CSS.');
+ if(mode==='minify')return s.replace(/\s+/g,' ').replace(/\s*([{}:;,>+~])\s*/g,'$1').replace(/;}/g,'}').trim();
+ s=s.replace(/\s*\{\s*/g,' {\n  ').replace(/;\s*/g,';\n  ').replace(/\s*}\s*/g,'\n}\n\n').replace(/;\n  }/g,'\n}');
+ return s.trim()+'\n';
 }
 function markdownPreview(){const i=document.getElementById('markdown-input'),p=document.getElementById('markdown-preview');if(i&&p)p.innerHTML=markdown(i.value);}
 function download(content,type,name){const url=URL.createObjectURL(new Blob([content],{type:type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
