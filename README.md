@@ -45,7 +45,7 @@ Las categorías son **Herramientas básicas**, **Código y desarrollo**, **Texto
 - **Fecha y Unix:** convierte fechas locales y timestamps.
 
 #### Código y desarrollo
-- **Editor HTML/CSS/JS:** permite escribir código y verlo en una vista previa aislada.
+- **Editor para programadores HTML/CSS/JS:** vista previa automática, ejecución manual, atajos Ctrl/⌘ + Enter, sangría con Tab, copiar cada lenguaje y descargar un HTML independiente. Usa un iframe aislado.
 - **XML ↔ JSON:** convierte estructuras compatibles entre ambos formatos.
 - **Formateador SQL:** mejora la legibilidad de consultas habituales.
 - **Validador HTML e inspector JavaScript:** detectan algunos errores frecuentes.
@@ -144,7 +144,7 @@ AmilcarTools is a free collection of browser tools for text, data, code, images,
 - **Source code:** https://github.com/AmilcarGit/AmilcarTools
 - **Navigation:** use the three-line menu to browse Basic Tools, Code & Development, Text & Data, Design & Images, and Security & Utilities.
 - **Text and data:** text analysis, JSON formatting, Base64/URL encoding, CSV ↔ JSON, CSV cleanup, Markdown, Lorem Ipsum, JWT decoding and text comparison.
-- **Development:** HTML/CSS/JavaScript editor, XML ↔ JSON, SQL formatting, basic HTML/JavaScript inspection, Regex testing, SVG tools and basic JSON Schema validation.
+- **Development:** HTML/CSS/JavaScript editor with live preview, keyboard shortcuts, indentation, per-language copy and standalone HTML export; XML ↔ JSON, SQL formatting, basic HTML/JavaScript inspection, Regex testing, SVG tools and basic JSON Schema validation.
 - **Design and images:** image conversion and resizing, customizable QR colors, color palettes, CSS gradients, favicon creation, image color extraction and ASCII art.
 - **Security and utilities:** browser-supported hashing, TOTP codes, password analysis, SEO metadata, robots.txt, Unix time conversion and calculator.
 - **Privacy-minded:** processing happens in the browser; no external API key or project backend is required.
@@ -165,6 +165,10 @@ Then visit http://localhost:8000. No npm installation, database or backend is re
 ### Menu and navigation
 
 The tools menu supports accent-insensitive search, live result counts, category grouping with visible-item counters, a dedicated icon for each tool, quick access to six common tools, favorites and recent tools stored locally in the browser. The search can be cleared with one tap; Escape closes the menu, the slash key focuses search when appropriate, and focus returns to the previous control after closing. The layout includes mobile adjustments and reduced-motion preferences.
+
+### Developer editor
+
+The HTML/CSS/JavaScript editor offers automatic preview while typing, manual run, `Ctrl/⌘ + Enter` to execute, `Tab` indentation, individual copy buttons and a standalone HTML download that combines all three code areas. Preview runs in a sandboxed iframe. Code may still request external resources, so only run code you trust.
 
 ### Image Studio
 
