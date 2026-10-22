@@ -15,7 +15,7 @@ test('las cinco herramientas avanzadas están enlazadas y documentadas', () => {
     assert.ok(readme.toLowerCase().includes(tool === 'images' ? 'imágenes' : tool === 'editor' ? 'editor html/css/js' : tool === 'diff' ? 'comparador' : tool === 'qr' ? 'códigos qr' : 'markdown'));
   }
   assert.match(html, /src\/advanced-tools\.js/);
-  assert.match(sw, /amilcartools-v12/);
+  assert.match(sw, /amilcartools-v13/);
   assert.match(sw, /src\/advanced-tools\.js/);
 });
 
@@ -45,14 +45,14 @@ test('las cinco herramientas nuevas tienen botones, renderizado y acciones', () 
   assert.match(js, /function toCsv\(/);
   assert.match(js, /function decodeBase64Url\(/);
   assert.match(js, /function cssTransform\(/);
-  assert.match(sw, /amilcartools-v12/);
+  assert.match(sw, /amilcartools-v13/);
 });
 
-test('24 herramientas adicionales enlazadas y con procesadores',()=>{const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),j=fs.readFileSync(path.join(root,'src/extra-tools.js'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');for(const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"]){assert.match(h,new RegExp('data-extra-tool="'+id+'"'));assert.ok(j.includes("'"+id+"'"))}assert.match(j,/async function run/);assert.match(sw,/amilcartools-v12/);assert.match(sw,/src\/extra-tools\.js/)});
+test('24 herramientas adicionales enlazadas y con procesadores',()=>{const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),j=fs.readFileSync(path.join(root,'src/extra-tools.js'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');for(const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"]){assert.match(h,new RegExp('data-extra-tool="'+id+'"'));assert.ok(j.includes("'"+id+"'"))}assert.match(j,/async function run/);assert.match(sw,/amilcartools-v13/);assert.match(sw,/src\/extra-tools\.js/)});
 
 test('el generador QR permite elegir colores locales',()=>{const js=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8');assert.match(js,/id="qr-fg" type="color"/);assert.match(js,/id="qr-bg" type="color"/);assert.match(js,/qrSvg\(qr\(v\)\)\.replace/)});
 
-test('menú hamburguesa organiza herramientas y elimina botones duplicados',()=>{const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),m=fs.readFileSync(path.join(root,'src/menu.js'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(h,/id="menu-toggle"/);assert.match(h,/id="tool-menu"/);assert.match(h,/src\/menu\.js/);for(const group of ['Código y desarrollo','Texto y datos','Diseño e imágenes','Seguridad y utilidades'])assert.ok(m.includes(group));assert.match(sw,/amilcartools-v12/);assert.match(sw,/src\/menu\.js/);for(const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"])assert.equal((h.match(new RegExp('data-extra-tool="'+id+'"','g'))||[]).length,1,'Botón duplicado o ausente: '+id)});
+test('menú hamburguesa organiza herramientas y elimina botones duplicados',()=>{const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),m=fs.readFileSync(path.join(root,'src/menu.js'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(h,/id="menu-toggle"/);assert.match(h,/id="tool-menu"/);assert.match(h,/src\/menu\.js/);for(const group of ['Código y desarrollo','Texto y datos','Diseño e imágenes','Seguridad y utilidades'])assert.ok(m.includes(group));assert.match(sw,/amilcartools-v13/);assert.match(sw,/src\/menu\.js/);for(const id of ["xml","sql","htmlvalidate","jsinspect","regexpro","palette","gradient","lorem","hashpro","totp","passcheck","wordpro","diffpro","csvclean","schema","favicon","svg","extractcolors","resize","ascii","seo","robots","timepro","calculator"])assert.equal((h.match(new RegExp('data-extra-tool="'+id+'"','g'))||[]).length,1,'Botón duplicado o ausente: '+id)});
 
 test('el menú incluye búsqueda, favoritos e historial local', () => {
   const menu = fs.readFileSync(path.join(root, 'src/menu.js'), 'utf8');
@@ -117,4 +117,19 @@ test('el menú mejora búsqueda, accesibilidad y controles de teclado', () => {
   assert.match(css, /prefers-reduced-motion:reduce/);
   assert.match(css, /overscroll-behavior:contain/);
   assert.match(css, /\.menu-search-clear/);
+});
+
+
+test('el menú muestra iconos por herramienta, accesos rápidos y contadores de categoría', () => {
+  const menu = fs.readFileSync(path.join(root, 'src/menu.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8');
+  const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+  assert.match(menu, /const toolIcons=/);
+  assert.match(menu, /className='menu-tool-icon'/);
+  assert.match(menu, /id="menu-quick"/);
+  assert.match(menu, /Accesos rápidos/);
+  assert.match(menu, /count\.textContent=q\|\|filter==='favorites'\?visible\+'\/'\+all:String\(all\)/);
+  assert.match(css, /\.menu-tool-icon/);
+  assert.match(css, /\.menu-quick-section/);
+  assert.match(sw, /amilcartools-v13/);
 });
