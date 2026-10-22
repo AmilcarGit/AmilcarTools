@@ -162,7 +162,7 @@ test('la portada y el menú móvil tienen espaciado compacto y foco accesible',(
   const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
   assert.match(css,/@media\(max-width:640px\)\{\s*\.topbar\{height:66px\}/);
   assert.match(css,/\.hero\{padding:30px 0 22px\}/);
-  assert.match(css,/\.menu-search:focus-visible\{outline:none/);
+  assert.match(css,/\.menu-search:focus,\.menu-search:focus-visible\{outline:none/);
   assert.match(css,/\.menu-shortcuts \.menu-item\{min-height:42px/);
   assert.match(css,/\.menu-drawer\{width:100vw;max-width:100vw/);
   assert.match(css,/env\(safe-area-inset-top\)/);
