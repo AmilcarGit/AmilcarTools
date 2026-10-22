@@ -26,7 +26,7 @@ AmilcarTools es una colección gratuita de herramientas web para texto, datos, c
 
 1. Abre [AmilcarTools](https://amilcartools.vercel.app).
 2. Pulsa el botón **☰** de la parte superior.
-3. Abre la categoría que necesitas.
+3. Usa los accesos rápidos o abre la categoría que necesitas; cada herramienta tiene su propio icono y las categorías muestran cuántas opciones hay.
 4. Selecciona una herramienta.
 5. Usa sus controles para procesar, copiar o descargar resultados cuando esas opciones estén disponibles.
 
@@ -164,7 +164,7 @@ Then visit http://localhost:8000. No npm installation, database or backend is re
 
 ### Menu and navigation
 
-The tools menu supports accent-insensitive search, live result counts, category grouping, favorites and recent tools stored locally in the browser. The search can be cleared with one tap; Escape closes the menu, the slash key focuses search when appropriate, and focus returns to the previous control after closing. The layout includes mobile adjustments and reduced-motion preferences.
+The tools menu supports accent-insensitive search, live result counts, category grouping with visible-item counters, a dedicated icon for each tool, quick access to six common tools, favorites and recent tools stored locally in the browser. The search can be cleared with one tap; Escape closes the menu, the slash key focuses search when appropriate, and focus returns to the previous control after closing. The layout includes mobile adjustments and reduced-motion preferences.
 
 ### Image Studio
 
