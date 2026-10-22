@@ -136,3 +136,22 @@ test('el menú muestra iconos por herramienta, accesos rápidos y contadores de 
 
 
 test('Image Studio permite transformar y ajustar imágenes antes de exportar',()=>{const js=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8'),css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8'),readme=fs.readFileSync(path.join(root,'README.md'),'utf8');for(const action of ['image-rotate-left','image-rotate-right','image-flip-x','image-flip-y','image-reset-edits'])assert.ok(js.includes(action),'Falta acción '+action);for(const id of ['image-brightness','image-contrast','image-saturation','image-grayscale'])assert.ok(js.includes(id),'Falta ajuste '+id);assert.match(js,/ctx\.rotate\(opts\.rotation\*Math\.PI\/180\)/);assert.match(js,/ctx\.filter='brightness\('/);assert.match(js,/ctx\.drawImage\(source\.image,-source\.width\/2,-source\.height\/2\)/);assert.ok(js.includes("blob.type==='image/webp'?'webp':blob.type==='image/jpeg'?'jpg':'png'"),'La extensión debe coincidir con el formato exportado.');assert.match(css,/\.image-edit-tools/);assert.match(readme,/Image Studio/);assert.match(sw,/amilcartools-v14/)});
+
+
+test('el editor para programadores incluye vista en vivo, atajos, copia y exportación independiente',()=>{
+  const js=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8');
+  const css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8');
+  const readme=fs.readFileSync(path.join(root,'README.md'),'utf8');
+  const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
+  for(const id of ['editor-live','adv-html','adv-css','adv-js','adv-preview','editor-preview-status'])assert.ok(js.includes(id),'Falta control '+id);
+  for(const action of ['editor-run','editor-reset','editor-download','editor-copy-html','editor-copy-css','editor-copy-js'])assert.ok(js.includes(action),'Falta acción '+action);
+  assert.match(js,/setTimeout\(runPreview,280\)/);
+  assert.match(js,/event\.key==='Tab'/);
+  assert.match(js,/event\.ctrlKey\|\|event\.metaKey/);
+  assert.match(js,/proyecto-amilcartools\.html/);
+  assert.match(js,/sandbox="allow-scripts"/);
+  assert.match(css,/\.editor-code-card/);
+  assert.match(css,/\.editor-preview-card/);
+  assert.match(readme,/vista previa automática/i);
+  assert.match(sw,/amilcartools-v15/);
+});
