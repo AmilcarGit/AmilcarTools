@@ -66,7 +66,7 @@ Las categorías son **Herramientas básicas**, **Código y desarrollo**, **Texto
 - **Decodificador JWT:** muestra el encabezado y el contenido de un token.
 
 #### Diseño e imágenes
-- **Compresor y convertidor de imágenes:** trabaja con WebP, JPEG y PNG, ajusta la calidad y redimensiona imágenes de hasta 25 MB.
+- **Image Studio:** convierte y comprime WebP, JPEG y PNG; redimensiona sin ampliar, gira 90°, voltea horizontal o verticalmente y ajusta brillo, contraste, saturación o blanco y negro. Admite lotes de hasta 20 imágenes (25 MB cada una), con preajustes para publicaciones, historias y formatos horizontales.
 - **Generador QR:** crea códigos QR SVG localmente y permite personalizar los colores.
 - **Paletas de colores y degradados CSS:** crea combinaciones y estilos de color.
 - **Generador de favicon:** crea iconos a partir de texto o imágenes, según los controles disponibles.
@@ -168,7 +168,7 @@ The tools menu supports accent-insensitive search, live result counts, category 
 
 ### Image Studio
 
-The image tool works locally in your browser and supports WebP, JPEG and PNG export, quality adjustment, maximum dimensions that preserve aspect ratio, presets for square posts, stories/statuses, landscape images and social posts, and batch processing for up to 20 images (25 MB per file). Each processed file gets its own download link; files are not uploaded to a server. Animated GIFs are exported as a static image. Browser support for formats may vary.
+Image Studio works locally in your browser and supports WebP, JPEG and PNG export, quality adjustment, aspect-ratio-preserving resize, 90-degree rotation, horizontal/vertical flip, brightness, contrast, saturation and grayscale. It includes presets for square posts, stories/statuses, landscape images and social posts, and batch processing for up to 20 images (25 MB per file). Each processed file gets its own download link; files are not uploaded to a server. Animated GIFs are exported as a static image. Browser support for formats may vary.
 
 ### Important limitations
 
