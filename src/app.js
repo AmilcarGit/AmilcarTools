@@ -239,6 +239,7 @@ if (soundToggle) soundToggle.addEventListener('click', () => {
   if (uiSoundsEnabled) playUiSound('start');
 });
 document.addEventListener('click', event => {
+  if (!event.isTrusted) return;
   const button = event.target.closest('button, .menu-item, .menu-favorite');
   if (button && button.id !== 'sound-toggle' && !button.disabled) playUiSound(button.id === 'start-app' ? 'start' : 'tap');
 });
