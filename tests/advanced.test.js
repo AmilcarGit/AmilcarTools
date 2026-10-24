@@ -197,3 +197,20 @@ test('el editor no hace el análisis pesado en cada pulsación',()=>{
  assert.match(a,/updateEditorMeta\(event\.target\.id\)/);
  assert.doesNotMatch(a,/updateEditorLines\(event\.target\.id\);updateEditorMeta\(\)/);
 });
+
+test('el menú ofrece vista previa y descripciones de las herramientas',()=>{
+ const menu=fs.readFileSync(path.join(root,'src/menu.js'),'utf8');
+ assert.match(menu,/id="menu-tool-preview"/);
+ assert.match(menu,/id="menu-preview-title"/);
+ assert.match(menu,/function showPreview\(item\)/);
+ assert.match(menu,/function selectTool\(b\)/);
+ assert.match(menu,/close\(\);/);
+ assert.match(menu,/toolDescriptions/);
+});
+test('los sonidos de interfaz tienen al menos 15 variantes locales',()=>{
+ const app=fs.readFileSync(path.join(root,'src/app.js'),'utf8');
+ const presets=app.match(/\{wave:'(?:sine|triangle|square)',notes:\[/g)||[];
+ assert.ok(presets.length>=15,'debe incluir 15 sonidos distintos como mínimo');
+ assert.match(app,/Math\.random\(\)\*uiSoundPresets\.length/);
+ assert.match(app,/localStorage\.setItem\('amilcartools-sounds'/);
+});
