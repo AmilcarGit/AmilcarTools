@@ -257,3 +257,21 @@ body.menu-open{overflow:hidden}
 :root[data-theme="light"] .hero-meta span{background:#ffffffa6;border-color:#20243810}
 :root[data-theme="light"] .menu-footer{border-top-color:var(--line)}
 @media(prefers-reduced-motion:reduce){.welcome-start span{transition:none}}
+
+/* Professional editor: synchronized line gutters and inline diagnostics */
+.editor-input-wrap{display:flex;align-items:stretch;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#0b0e18}
+.editor-input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px #a99bff17}
+.editor-input-wrap .adv-code{flex:1;min-width:0;width:0;border:0;border-radius:0;box-shadow:none!important;outline:none;padding:13px 14px;background:transparent;line-height:1.6;white-space:pre;overflow:auto;tab-size:2}
+.editor-line-numbers{flex:0 0 42px;width:42px;min-height:190px;margin:0;padding:13px 9px 13px 0;overflow:hidden;text-align:right;white-space:pre;user-select:none;border-right:1px solid #30364b;background:#111523;color:#717b97;font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}
+.editor-diagnostics{margin-top:14px;padding:14px 16px;border:1px solid var(--line);border-radius:13px;background:var(--panel2);font-size:12px}
+.editor-diagnostics>strong{display:block;margin-bottom:8px;font-size:13px}
+.editor-diagnostics ul{display:grid;gap:7px;list-style:none;margin:0;padding:0}
+.editor-diagnostics li{display:flex;align-items:flex-start;gap:8px;line-height:1.5;overflow-wrap:anywhere}
+.editor-diagnostics li span{display:grid;place-items:center;flex:0 0 19px;width:19px;height:19px;border-radius:6px;background:#76e3d01c;color:var(--accent2);font-weight:900}
+.editor-diagnostics .diagnostic-error span{background:#ff9baf20;color:var(--danger)}
+.editor-diagnostics .diagnostic-info span{background:#a99bff1c;color:var(--accent)}
+.editor-diagnostics small{display:block;margin-top:10px;color:var(--muted);line-height:1.5}
+:root[data-theme="light"] .editor-input-wrap{background:#fff;border-color:#d4d9e7}
+:root[data-theme="light"] .editor-line-numbers{background:#f0f2f8;border-right-color:#dce1ee;color:#78819a}
+:root[data-theme="light"] .editor-diagnostics{background:#f6f7fc;border-color:#dce1ee}
+@media(max-width:600px){.editor-line-numbers{flex-basis:34px;width:34px;padding-right:7px;font-size:11px}.editor-input-wrap .adv-code{font-size:12px;padding:12px 10px}.editor-diagnostics{padding:12px}}
