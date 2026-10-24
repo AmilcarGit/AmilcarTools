@@ -15,6 +15,9 @@ AmilcarTools es una colección gratuita de herramientas web para texto, datos, c
 
 ### ✨ Características principales
 
+- **Pantalla de bienvenida:** al abrir la aplicación verás una presentación limpia y el botón **Empezar** antes de entrar a las herramientas.
+- **Tema claro y oscuro:** cambia entre luz blanca y modo oscuro; tu preferencia se guarda en este dispositivo.
+- **Paneles ordenados:** al abrir una herramienta, se oculta la anterior para mantener el espacio de trabajo despejado.
 - **Gratis y local:** no necesitas una cuenta ni un servidor de AmilcarTools.
 - **Sin APIs externas:** las herramientas se ejecutan en el navegador y no requieren claves de API.
 - **Menú organizado:** pulsa el botón de tres líneas para explorar las herramientas por categorías.
@@ -22,13 +25,14 @@ AmilcarTools es una colección gratuita de herramientas web para texto, datos, c
 - **PWA:** puede instalarse desde navegadores compatibles y almacena recursos de la aplicación en caché.
 - **Código abierto:** puedes revisar el código, proponer mejoras y adaptar el proyecto.
 
-### 🧭 Cómo usar el menú
+### 🧭 Cómo empezar y usar el menú
 
-1. Abre [AmilcarTools](https://amilcartools.vercel.app).
-2. Pulsa el botón **☰** de la parte superior.
-3. Usa los accesos rápidos o abre la categoría que necesitas; cada herramienta tiene su propio icono y las categorías muestran cuántas opciones hay.
-4. Selecciona una herramienta.
-5. Usa sus controles para procesar, copiar o descargar resultados cuando esas opciones estén disponibles.
+1. Abre [AmilcarTools](https://amilcartools.vercel.app) y pulsa **Empezar** en la pantalla de bienvenida.
+2. Cambia entre **☀️ Luz blanca** y **🌙 Modo oscuro** desde el control de tema.
+3. Pulsa el botón **☰** de la parte superior para abrir el menú.
+4. Usa la búsqueda, los accesos rápidos o las categorías para encontrar una herramienta.
+5. Al elegir otra herramienta, el espacio de trabajo anterior se cierra automáticamente.
+6. Usa los controles para procesar, copiar o descargar resultados cuando estén disponibles.
 
 Las categorías son **Herramientas básicas**, **Código y desarrollo**, **Texto y datos**, **Diseño e imágenes** y **Seguridad y utilidades**.
 
