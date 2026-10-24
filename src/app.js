@@ -186,6 +186,24 @@ function updateSoundToggle() {
   soundToggle.setAttribute('aria-pressed', String(uiSoundsEnabled));
   soundToggle.textContent = uiSoundsEnabled ? '🔊 Sonidos activados' : '🔇 Sonidos desactivados';
 }
+const uiSoundPresets=[
+  {wave:'sine',notes:[660,880],length:.09,volume:.024},
+  {wave:'triangle',notes:[520,760],length:.11,volume:.025},
+  {wave:'sine',notes:[740,590],length:.10,volume:.022},
+  {wave:'square',notes:[440,660],length:.065,volume:.012},
+  {wave:'triangle',notes:[880,1175],length:.10,volume:.018},
+  {wave:'sine',notes:[580,690,820],length:.13,volume:.022},
+  {wave:'triangle',notes:[620,490],length:.10,volume:.022},
+  {wave:'sine',notes:[920,720],length:.08,volume:.018},
+  {wave:'square',notes:[330,495],length:.075,volume:.009},
+  {wave:'triangle',notes:[700,940,700],length:.14,volume:.018},
+  {wave:'sine',notes:[480,640],length:.12,volume:.024},
+  {wave:'triangle',notes:[1040,780],length:.085,volume:.017},
+  {wave:'sine',notes:[610,915],length:.11,volume:.021},
+  {wave:'triangle',notes:[540,810,1080],length:.15,volume:.018},
+  {wave:'sine',notes:[800,600,900],length:.14,volume:.020}
+];
+let lastUiSoundIndex=-1;
 function playUiSound(kind = 'tap') {
   if (!uiSoundsEnabled) return;
   try {
@@ -193,19 +211,24 @@ function playUiSound(kind = 'tap') {
     if (!AudioContextClass) return;
     if (!uiAudioContext) uiAudioContext = new AudioContextClass();
     if (uiAudioContext.state === 'suspended') uiAudioContext.resume();
-    const oscillator = uiAudioContext.createOscillator();
-    const gain = uiAudioContext.createGain();
-    const now = uiAudioContext.currentTime;
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(kind === 'start' ? 520 : 680, now);
-    oscillator.frequency.exponentialRampToValueAtTime(kind === 'start' ? 880 : 520, now + 0.075);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(kind === 'start' ? 0.055 : 0.025, now + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + (kind === 'start' ? 0.18 : 0.085));
-    oscillator.connect(gain);
-    gain.connect(uiAudioContext.destination);
-    oscillator.start(now);
-    oscillator.stop(now + (kind === 'start' ? 0.19 : 0.09));
+    let index=Math.floor(Math.random()*uiSoundPresets.length);
+    if(index===lastUiSoundIndex)index=(index+1+Math.floor(Math.random()*(uiSoundPresets.length-1)))%uiSoundPresets.length;
+    lastUiSoundIndex=index;
+    const preset=kind==='start'?{wave:'sine',notes:[520,660,880,1040],length:.24,volume:.035}:uiSoundPresets[index];
+    const now=uiAudioContext.currentTime;
+    const step=preset.length/preset.notes.length;
+    preset.notes.forEach((frequency,i)=>{
+      const oscillator=uiAudioContext.createOscillator();
+      const gain=uiAudioContext.createGain();
+      const at=now+i*step;
+      oscillator.type=preset.wave;
+      oscillator.frequency.setValueAtTime(frequency,at);
+      gain.gain.setValueAtTime(.0001,at);
+      gain.gain.exponentialRampToValueAtTime(preset.volume,at+.008);
+      gain.gain.exponentialRampToValueAtTime(.0001,at+step*.92);
+      oscillator.connect(gain);gain.connect(uiAudioContext.destination);
+      oscillator.start(at);oscillator.stop(at+step);
+    });
   } catch (_) {}
 }
 updateSoundToggle();
