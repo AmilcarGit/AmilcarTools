@@ -9,14 +9,28 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="src/styles.css">
+  <meta name="color-scheme" content="dark light">
 </head>
 <body>
-  <header class="topbar">
+  <section id="welcome-screen" class="welcome-screen" aria-labelledby="welcome-title">
+    <div class="welcome-glow welcome-glow-one"></div><div class="welcome-glow welcome-glow-two"></div>
+    <div class="welcome-card">
+      <div class="welcome-brand"><span class="brand-mark">A</span><span>Amilcar<span class="brand-accent">Tools</span></span></div>
+      <span class="welcome-badge"><span class="eyebrow-dot"></span> GRATUITO · PRIVADO · SIN APIs</span>
+      <h1 id="welcome-title">Tu espacio para <span>crear y programar.</span></h1>
+      <p>Un conjunto de herramientas útiles para desarrollar, diseñar y trabajar. Todo desde tu dispositivo, sin cuentas y sin enviar tus datos a un servidor.</p>
+      <div class="welcome-features"><span>⌘ Código</span><span>◈ Diseño</span><span>▦ Utilidades</span></div>
+      <button id="start-app" class="btn primary welcome-start" type="button">Empezar <span aria-hidden="true">→</span></button>
+      <button class="theme-toggle welcome-theme" type="button" data-theme-toggle aria-label="Cambiar tema">☀️ Luz blanca</button>
+      <small>AmilcarTools · Código abierto · Funciona sin conexión después de cargar</small>
+    </div>
+  </section>
+  <header class="topbar" hidden>
     <a class="brand" href="#inicio" aria-label="AmilcarTools inicio"><span class="brand-mark">A</span><span>Amilcar<span class="brand-accent">Tools</span><small>UTILIDADES PRIVADAS</small></span></a>
     <div class="header-actions"><div class="privacy-pill"><span></span> Todo se procesa en tu dispositivo</div><button id="theme-toggle" class="theme-toggle" type="button" aria-label="Cambiar a modo claro" title="Cambiar tema"><span aria-hidden="true">☼</span><span class="theme-toggle-label">Modo claro</span></button><button id="menu-toggle" class="menu-toggle" type="button" aria-label="Abrir menú de herramientas" aria-controls="tool-menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </header>
   <div id="tool-menu" class="tool-menu" hidden><button class="menu-backdrop" data-menu-close aria-label="Cerrar menú"></button><aside class="menu-drawer" aria-label="Menú de herramientas"><div class="menu-heading"><div><span class="section-kicker">AMILCARTOOLS</span><h2>Todas las herramientas</h2><p>Elige una categoría y abre la herramienta.</p></div><button type="button" class="menu-close" data-menu-close aria-label="Cerrar menú">×</button></div><div id="menu-categories" class="menu-categories"></div><p class="menu-footer">Gratis · Local · Sin APIs externas</p></aside></div>
-  <main id="inicio">
+  <main id="inicio" hidden>
     <section class="welcome-screen" id="welcome-screen" aria-labelledby="welcome-title">
       <div class="welcome-glow" aria-hidden="true"></div>
       <div class="welcome-logo" aria-hidden="true"><span>A</span><i></i></div>
@@ -37,12 +51,12 @@
     <nav class="tool-tabs" aria-label="Herramientas" hidden>
       <button class="tab active" data-tool="text">Texto</button><button class="tab" data-tool="json">JSON</button><button class="tab" data-tool="password">Contraseñas</button><button class="tab" data-tool="base64">Base64</button><button class="tab" data-tool="url">URL</button><button class="tab" data-tool="hash">SHA-256</button><button class="tab" data-tool="uuid">UUID</button><button class="tab" data-tool="color">Colores</button><button class="tab" data-tool="regex">Regex</button><button class="tab" data-tool="timestamp">Unix time</button>
     </nav>
-    <section class="workspace">
+    <section class="workspace" id="basic-workspace" hidden>
       <div class="workspace-heading"><div><div class="section-kicker" id="tool-kicker">HERRAMIENTA 01</div><h2 id="tool-title">Analizador de texto</h2><p id="tool-description">Cuenta caracteres, palabras y líneas al instante.</p></div><span class="local-tag">● LOCAL</span></div>
       <div id="tool-panel" class="tool-panel"></div>
       <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
     </section>
-    <section class="advanced-workspace" id="advanced-tools" aria-labelledby="advanced-title">
+    <section class="advanced-workspace" id="advanced-tools" aria-labelledby="advanced-title" hidden>
       <div class="workspace-heading"><div><div class="section-kicker">HERRAMIENTAS AVANZADAS</div><h2 id="advanced-title">Editor HTML/CSS/JS</h2><p id="advanced-description">Prueba código en una vista previa aislada.</p></div><span class="local-tag">● LOCAL</span></div>
       <div id="tool-registry" hidden><button class="adv-tab" data-advanced-tool="editor" aria-pressed="false">Editor de código</button><button class="adv-tab" data-advanced-tool="images" aria-pressed="false">Imágenes</button><button class="adv-tab" data-advanced-tool="qr" aria-pressed="false">Código QR</button><button class="adv-tab" data-advanced-tool="diff" aria-pressed="false">Comparar</button><button class="adv-tab" data-advanced-tool="markdown" aria-pressed="false">Markdown</button><button class="adv-tab" data-advanced-tool="csv" aria-pressed="false">CSV ↔ JSON</button><button class="adv-tab" data-advanced-tool="jwt" aria-pressed="false">JWT</button><button class="adv-tab" data-advanced-tool="html" aria-pressed="false">HTML</button><button class="adv-tab" data-advanced-tool="list" aria-pressed="false">Listas</button><button class="adv-tab" data-advanced-tool="css" aria-pressed="false">CSS</button><button class="adv-tab" data-extra-tool="xml" aria-pressed="false">XML ↔ JSON</button><button class="adv-tab" data-extra-tool="sql" aria-pressed="false">Formateador SQL</button><button class="adv-tab" data-extra-tool="htmlvalidate" aria-pressed="false">Validador HTML</button><button class="adv-tab" data-extra-tool="jsinspect" aria-pressed="false">Inspector JavaScript</button><button class="adv-tab" data-extra-tool="regexpro" aria-pressed="false">Regex PRO</button><button class="adv-tab" data-extra-tool="palette" aria-pressed="false">Paletas</button><button class="adv-tab" data-extra-tool="gradient" aria-pressed="false">Degradados</button><button class="adv-tab" data-extra-tool="lorem" aria-pressed="false">Lorem Ipsum</button><button class="adv-tab" data-extra-tool="hashpro" aria-pressed="false">Hashes</button><button class="adv-tab" data-extra-tool="totp" aria-pressed="false">TOTP 2FA</button><button class="adv-tab" data-extra-tool="passcheck" aria-pressed="false">Analizar contraseña</button><button class="adv-tab" data-extra-tool="wordpro" aria-pressed="false">Contador PRO</button><button class="adv-tab" data-extra-tool="diffpro" aria-pressed="false">Comparador PRO</button><button class="adv-tab" data-extra-tool="csvclean" aria-pressed="false">Limpiar CSV</button><button class="adv-tab" data-extra-tool="schema" aria-pressed="false">JSON Schema</button><button class="adv-tab" data-extra-tool="favicon" aria-pressed="false">Favicon</button><button class="adv-tab" data-extra-tool="svg" aria-pressed="false">Optimizar SVG</button><button class="adv-tab" data-extra-tool="extractcolors" aria-pressed="false">Extraer colores</button><button class="adv-tab" data-extra-tool="resize" aria-pressed="false">Redimensionar</button><button class="adv-tab" data-extra-tool="ascii" aria-pressed="false">Imagen a ASCII</button><button class="adv-tab" data-extra-tool="seo" aria-pressed="false">Generador SEO</button><button class="adv-tab" data-extra-tool="robots" aria-pressed="false">robots.txt</button><button class="adv-tab" data-extra-tool="timepro" aria-pressed="false">Fecha y Unix</button><button class="adv-tab" data-extra-tool="calculator" aria-pressed="false">Calculadora</button></div>
       <div id="advanced-panel" class="advanced-panel"></div><div id="advanced-feedback" class="feedback" role="status" aria-live="polite"></div>
