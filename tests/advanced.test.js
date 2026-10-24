@@ -184,7 +184,7 @@ test('las herramientas avanzadas cierran el panel básico y se ocultan hasta sel
 test('el editor incluye números de línea sincronizados y diagnóstico local',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),js=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8'),css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8'),readme=fs.readFileSync(path.join(root,'README.md'),'utf8');
  for(const id of ['adv-html','adv-css','adv-js']){assert.match(js,new RegExp('id="lines-'+id+'"'));}
- assert.match(js,/function updateEditorMeta\(\)/);assert.match(js,/new Function\(js\)/);assert.match(js,/if\(depth!==0\)/);assert.match(js,/root\.addEventListener\('scroll'/);assert.match(js,/id="editor-diagnostics"/);assert.match(css,/\.editor-line-numbers/);assert.match(css,/\.editor-diagnostics/);assert.match(readme,/números de línea sincronizados/);assert.match(html,/id="start-app"/);
+ assert.match(js,/function updateEditorMeta\(changedId\)/);assert.match(js,/new Function\(js\)/);assert.match(js,/if\(depth!==0\)/);assert.match(js,/root\.addEventListener\('scroll'/);assert.match(js,/id="editor-diagnostics"/);assert.match(css,/\.editor-line-numbers/);assert.match(css,/\.editor-diagnostics/);assert.match(readme,/números de línea sincronizados/);assert.match(html,/id="start-app"/);
 });
 
 test('el editor no hace el análisis pesado en cada pulsación',()=>{
