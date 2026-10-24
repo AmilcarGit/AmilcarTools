@@ -171,8 +171,6 @@
 .welcome-start:hover span{transform:translateX(4px)}
 .welcome-hint{margin:16px 0 0;color:var(--muted);font-size:11px}
 #app-shell>.hero{padding-top:48px}
-.workspace,.advanced-workspace{display:none}
-.workspace.is-active,.advanced-workspace.is-active{display:block}
 #app-shell{animation:welcome-in .24s ease-out}
 @keyframes welcome-in{from{opacity:.3;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 body.menu-open{overflow:hidden}
