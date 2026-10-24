@@ -287,3 +287,9 @@ body.menu-open{overflow:hidden}
 :root[data-theme="light"] .editor-pro-toolbar{background:#fff}
 :root[data-theme="light"] .editor-search-wrap input{background:#fff;color:var(--text)}
 @media(max-width:640px){.editor-pro-toolbar{padding:10px;gap:8px}.editor-search-wrap{min-width:100%;flex-basis:100%}.editor-pro-toolbar>[data-editor-find]{flex:1}.editor-line-count{font-size:10px}}
+
+/* Respecta la preferencia del dispositivo y evita animaciones innecesarias */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
