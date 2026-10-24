@@ -49,7 +49,7 @@ Las categorías son **Herramientas básicas**, **Código y desarrollo**, **Texto
 - **Fecha y Unix:** convierte fechas locales y timestamps.
 
 #### Código y desarrollo
-- **Editor para programadores HTML/CSS/JS:** carga diferida del editor, vista previa automática con actualización optimizada, ejecución manual, atajos Ctrl/⌘ + Enter, sangría con Tab, búsqueda en HTML/CSS/JS, contadores de líneas, revisión de sintaxis con espera breve para no bloquear la escritura, copiar cada lenguaje y descargar un HTML independiente. Usa un iframe aislado.
+- **Editor para programadores HTML/CSS/JS:** carga diferida del editor, vista previa inicial y actualización automática opcional (desactivada por defecto para escribir con fluidez), ejecución manual, atajos Ctrl/⌘ + Enter, sangría con Tab, búsqueda en HTML/CSS/JS, contadores de líneas, revisión de sintaxis con espera breve para no bloquear la escritura, copiar cada lenguaje y descargar un HTML independiente. Usa un iframe aislado.
 - **XML ↔ JSON:** convierte estructuras compatibles entre ambos formatos.
 - **Formateador SQL:** mejora la legibilidad de consultas habituales.
 - **Validador HTML e inspector JavaScript:** detectan algunos errores frecuentes.
@@ -172,7 +172,7 @@ The tools menu supports accent-insensitive search, live result counts, category 
 
 ### Developer editor
 
-The HTML/CSS/JavaScript editor is rendered only when selected to reduce initial work. It offers debounced live preview and syntax diagnostics, `Ctrl/⌘ + Enter` to execute, `Tab` indentation, line counts, code search, individual copy buttons and a standalone HTML download. Preview runs in a sandboxed iframe. Code may still request external resources, so only run code you trust.
+The HTML/CSS/JavaScript editor is rendered only when selected to reduce initial work. It offers an initial preview, optional automatic updates (off by default for smoother typing), and debounced syntax diagnostics, `Ctrl/⌘ + Enter` to execute, `Tab` indentation, line counts, code search, individual copy buttons and a standalone HTML download. Preview runs in a sandboxed iframe. Code may still request external resources, so only run code you trust.
 
 ### Image Studio
 
