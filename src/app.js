@@ -177,6 +177,48 @@ const welcome = $('#welcome-screen');
 const startButton = $('#start-app');
 const appHeader = document.querySelector('.topbar');
 const appMain = $('#inicio');
+let uiSoundsEnabled = false;
+let uiAudioContext = null;
+try { uiSoundsEnabled = localStorage.getItem('amilcartools-sounds') === 'on'; } catch (_) {}
+const soundToggle = $('#sound-toggle');
+function updateSoundToggle() {
+  if (!soundToggle) return;
+  soundToggle.setAttribute('aria-pressed', String(uiSoundsEnabled));
+  soundToggle.textContent = uiSoundsEnabled ? '🔊 Sonidos activados' : '🔇 Sonidos desactivados';
+}
+function playUiSound(kind = 'tap') {
+  if (!uiSoundsEnabled) return;
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!uiAudioContext) uiAudioContext = new AudioContextClass();
+    if (uiAudioContext.state === 'suspended') uiAudioContext.resume();
+    const oscillator = uiAudioContext.createOscillator();
+    const gain = uiAudioContext.createGain();
+    const now = uiAudioContext.currentTime;
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(kind === 'start' ? 520 : 680, now);
+    oscillator.frequency.exponentialRampToValueAtTime(kind === 'start' ? 880 : 520, now + 0.075);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(kind === 'start' ? 0.055 : 0.025, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + (kind === 'start' ? 0.18 : 0.085));
+    oscillator.connect(gain);
+    gain.connect(uiAudioContext.destination);
+    oscillator.start(now);
+    oscillator.stop(now + (kind === 'start' ? 0.19 : 0.09));
+  } catch (_) {}
+}
+updateSoundToggle();
+if (soundToggle) soundToggle.addEventListener('click', () => {
+  uiSoundsEnabled = !uiSoundsEnabled;
+  try { localStorage.setItem('amilcartools-sounds', uiSoundsEnabled ? 'on' : 'off'); } catch (_) {}
+  updateSoundToggle();
+  if (uiSoundsEnabled) playUiSound('start');
+});
+document.addEventListener('click', event => {
+  const button = event.target.closest('button, .menu-item, .menu-favorite');
+  if (button && button.id !== 'sound-toggle' && !button.disabled) playUiSound(button.id === 'start-app' ? 'start' : 'tap');
+});
 if (startButton) startButton.addEventListener('click', () => {
   if (welcome) welcome.hidden = true;
   if (appHeader) appHeader.hidden = false;
