@@ -49,7 +49,7 @@ Las categorías son **Herramientas básicas**, **Código y desarrollo**, **Texto
 - **Fecha y Unix:** convierte fechas locales y timestamps.
 
 #### Código y desarrollo
-- **Editor para programadores HTML/CSS/JS:** vista previa automática, ejecución manual, atajos Ctrl/⌘ + Enter, sangría con Tab, copiar cada lenguaje y descargar un HTML independiente. Usa un iframe aislado.
+- **Editor para programadores HTML/CSS/JS:** vista previa automática, ejecución manual, atajos Ctrl/⌘ + Enter, sangría con Tab, números de línea sincronizados, revisión local de sintaxis JavaScript/CSS, copiar cada lenguaje y descargar un HTML independiente. Usa un iframe aislado.
 - **XML ↔ JSON:** convierte estructuras compatibles entre ambos formatos.
 - **Formateador SQL:** mejora la legibilidad de consultas habituales.
 - **Validador HTML e inspector JavaScript:** detectan algunos errores frecuentes.
