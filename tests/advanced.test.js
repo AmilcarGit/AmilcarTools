@@ -108,6 +108,8 @@ test('el menú mejora búsqueda, accesibilidad y controles de teclado', () => {
   const menu = fs.readFileSync(path.join(root, 'src/menu.js'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8');
   assert.match(menu, /normalize\(value\)/);
+  assert.doesNotMatch(menu,/resultCount\.textContent=total\+[^;]+;refreshShortcuts\(\)/);
+  assert.match(menu,/save\(\);refreshShortcuts\(\);applyFilter\(\);close\(\)/);
   assert.match(menu, /menu-search-clear/);
   assert.match(menu, /menu-result-count/);
   assert.match(menu, /search\.focus\(\{preventScroll:true\}\)/);
