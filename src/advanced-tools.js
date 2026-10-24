@@ -9,6 +9,7 @@ function message(s,e){feedback.textContent=s||'';feedback.classList.toggle('erro
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function button(a,t,p){return '<button class="btn'+(p?' primary':'')+'" data-advanced-action="'+a+'">'+t+'</button>';}
 function render(name){
+ root.hidden=false;const basicWorkspace=document.getElementById('basic-workspace');if(basicWorkspace)basicWorkspace.hidden=true;
  message('');document.getElementById('advanced-title').textContent=names[name][0];document.getElementById('advanced-description').textContent=names[name][1];
  document.querySelectorAll('[data-advanced-tool]').forEach(b=>{b.classList.toggle('active',b.dataset.advancedTool===name);b.setAttribute('aria-pressed',String(b.dataset.advancedTool===name));});
  if(name==='editor'){
@@ -108,5 +109,6 @@ root.addEventListener('input',event=>{if(['adv-html','adv-css','adv-js'].include
 root.addEventListener('change',event=>{if(event.target.id==='editor-live'&&event.target.checked)runPreview();});
 root.addEventListener('keydown',event=>{if(!['adv-html','adv-css','adv-js'].includes(event.target.id))return;if(event.key==='Tab'){event.preventDefault();const el=event.target,start=el.selectionStart,end=el.selectionEnd,value=el.value;el.value=value.slice(0,start)+'  '+value.slice(end);el.selectionStart=el.selectionEnd=start+2;el.dispatchEvent(new Event('input',{bubbles:true}));}else if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();runPreview();message('Vista previa ejecutada.');}});
 render('editor');
+root.hidden=true;
 
 })();
