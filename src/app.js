@@ -15,6 +15,10 @@ const tools = {
 };
 function setFeedback(message = '', error = false) { feedback.textContent = message; feedback.classList.toggle('error', error); }
 function setTool(name) {
+  const basicWorkspace = $('#basic-workspace');
+  const advancedWorkspace = $('#advanced-tools');
+  if (basicWorkspace) basicWorkspace.hidden = false;
+  if (advancedWorkspace) advancedWorkspace.hidden = true;
   document.querySelectorAll('.tab').forEach(button => button.classList.toggle('active', button.dataset.tool === name));
   $('#tool-kicker').textContent = tools[name].kicker;
   $('#tool-title').textContent = tools[name].title;
@@ -169,5 +173,33 @@ panel.addEventListener('input', event => {
   if (event.target.id === 'color-hex') updateColor();
 });
 panel.addEventListener('click', event => { const button = event.target.closest('[data-action]'); if (button) runAction(button.dataset.action); });
-setTool('text');
+const welcome = $('#welcome-screen');
+const startButton = $('#start-app');
+const appHeader = document.querySelector('.topbar');
+const appMain = $('#inicio');
+if (startButton) startButton.addEventListener('click', () => {
+  if (welcome) welcome.hidden = true;
+  if (appHeader) appHeader.hidden = false;
+  if (appMain) appMain.hidden = false;
+  document.body.classList.add('app-started');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+function applyTheme(theme) {
+  const selected = theme === 'light' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = selected;
+  document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+    button.textContent = selected === 'light' ? '🌙 Modo oscuro' : '☀️ Luz blanca';
+    button.setAttribute('aria-label', selected === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a luz blanca');
+    button.setAttribute('aria-pressed', String(selected === 'light'));
+  });
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = selected === 'light' ? '#f5f7fb' : '#101321';
+  try { localStorage.setItem('amilcartools-theme', selected); } catch (_) {}
+}
+let savedTheme = 'dark';
+try { savedTheme = localStorage.getItem('amilcartools-theme') || 'dark'; } catch (_) {}
+applyTheme(savedTheme);
+document.querySelectorAll('[data-theme-toggle]').forEach(button => button.addEventListener('click', () => {
+  applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+}));
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
