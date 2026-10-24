@@ -12,7 +12,7 @@ test('las cinco herramientas avanzadas están enlazadas y documentadas', () => {
   for (const tool of ['editor', 'images', 'qr', 'diff', 'markdown']) {
     assert.match(html, new RegExp('data-advanced-tool="' + tool + '"'));
     assert.ok(js.includes(tool + ':['), 'Falta la herramienta ' + tool);
-    assert.ok(readme.toLowerCase().includes(tool === 'images' ? 'imágenes' : tool === 'editor' ? 'editor html/css/js' : tool === 'diff' ? 'comparador' : tool === 'qr' ? 'códigos qr' : 'markdown'));
+    assert.ok(readme.toLowerCase().includes(tool === 'images' ? 'imágenes' : tool === 'editor' ? 'editor para programadores html/css/js' : tool === 'diff' ? 'comparador' : tool === 'qr' ? 'códigos qr' : 'markdown'));
   }
   assert.match(html, /src\/advanced-tools\.js/);
   assert.match(sw, /amilcartools-v28/);
