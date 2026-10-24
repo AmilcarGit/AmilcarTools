@@ -152,7 +152,7 @@ test('el editor para programadores incluye vista en vivo, atajos, copia y export
   assert.match(js,/sandbox="allow-scripts"/);
   assert.match(css,/\.editor-code-card/);assert.match(css,/\.editor-pro-toolbar/);assert.match(css,/\.editor-diagnostics/);
   assert.match(css,/\.editor-preview-card/);
-  assert.match(readme,/vista previa automática/i);
+  assert.match(readme,/actualización automática opcional/i);
   assert.match(sw,/amilcartools-v23/);
 });
 
