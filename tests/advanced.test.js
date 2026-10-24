@@ -178,11 +178,20 @@ test('la aplicación comienza con bienvenida y mantiene el tema elegido',()=>{
 });
 test('las herramientas avanzadas cierran el panel básico y se ocultan hasta seleccionarse',()=>{
  const h=fs.readFileSync(path.join(root,'index.html'),'utf8'),a=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8'),x=fs.readFileSync(path.join(root,'src/extra-tools.js'),'utf8');
- assert.match(h,/id="basic-workspace" hidden/);assert.match(h,/id="advanced-tools"[^>]*hidden/);assert.match(a,/if\(basicWorkspace\)basicWorkspace\.hidden=true/);assert.match(a,/render\('editor'\);\s*root\.hidden=true/);assert.match(x,/root\.hidden=false;const basicWorkspace=document\.getElementById\('basic-workspace'\);if\(basicWorkspace\)basicWorkspace\.hidden=true/);
+ assert.match(h,/id="basic-workspace" hidden/);assert.match(h,/id="advanced-tools"[^>]*hidden/);assert.match(a,/if\(basicWorkspace\)basicWorkspace\.hidden=true/);assert.match(a,/root\.hidden=true/);assert.doesNotMatch(a,/render\('editor'\);\s*root\.hidden=true/);assert.match(a,/editorDiagnosticsTimer=setTimeout\(validateEditor,450\)/);assert.match(a,/editorPreviewTimer=setTimeout\(runPreview,450\)/);assert.match(x,/root\.hidden=false;const basicWorkspace=document\.getElementById\('basic-workspace'\);if\(basicWorkspace\)basicWorkspace\.hidden=true/);
 });
 
 test('el editor incluye números de línea sincronizados y diagnóstico local',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),js=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8'),css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8'),readme=fs.readFileSync(path.join(root,'README.md'),'utf8');
  for(const id of ['adv-html','adv-css','adv-js']){assert.match(js,new RegExp('id="lines-'+id+'"'));}
  assert.match(js,/function updateEditorMeta\(\)/);assert.match(js,/new Function\(js\)/);assert.match(js,/if\(depth!==0\)/);assert.match(js,/root\.addEventListener\('scroll'/);assert.match(js,/id="editor-diagnostics"/);assert.match(css,/\.editor-line-numbers/);assert.match(css,/\.editor-diagnostics/);assert.match(readme,/números de línea sincronizados/);assert.match(html,/id="start-app"/);
+});
+
+test('el editor no hace el análisis pesado en cada pulsación',()=>{
+ const a=fs.readFileSync(path.join(root,'src/advanced-tools.js'),'utf8');
+ assert.match(a,/function updateEditorMeta\(changedId\)/);
+ assert.match(a,/clearTimeout\(editorDiagnosticsTimer\)/);
+ assert.match(a,/editorDiagnosticsTimer=setTimeout\(validateEditor,450\)/);
+ assert.match(a,/updateEditorMeta\(event\.target\.id\)/);
+ assert.doesNotMatch(a,/updateEditorLines\(event\.target\.id\);updateEditorMeta\(\)/);
 });
