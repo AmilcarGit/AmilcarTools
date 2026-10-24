@@ -293,3 +293,13 @@ body.menu-open{overflow:hidden}
   html{scroll-behavior:auto!important}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* Efectos ligeros: solo se activan al interactuar, nunca quedan animándose en segundo plano */
+@media (hover:hover) and (pointer:fine){
+  .btn,.menu-item,.menu-favorite,.adv-tab{transition:background-color .14s ease,border-color .14s ease,box-shadow .14s ease,transform .14s ease}
+  .btn:hover{box-shadow:0 0 0 1px #a99bff12,0 5px 16px #00000012}
+  .btn.primary:hover{box-shadow:0 0 18px #a99bff26,0 5px 16px #00000012}
+  .menu-item:hover,.menu-item:focus-visible{box-shadow:inset 2px 0 0 var(--accent),0 0 14px #a99bff0b}
+  .adv-tab.active{box-shadow:inset 0 0 0 1px #a99bff10}
+}
+.menu-item:focus-visible,.menu-favorite:focus-visible,.btn:focus-visible,.adv-tab:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
