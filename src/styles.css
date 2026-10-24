@@ -211,3 +211,51 @@ body.menu-open{overflow:hidden}
 :root[data-theme="light"] .editor-status{background:#e9f7f4;color:#167568}
 @media(max-width:560px){.header-actions{gap:7px}.theme-toggle{min-height:38px;padding:0 9px}.theme-toggle-label{display:none}.welcome-screen{min-height:calc(100svh - 82px);padding:40px 18px}.welcome-logo{width:76px;height:76px;border-radius:23px}.welcome-screen h1{letter-spacing:-.045em}.welcome-points{gap:9px 13px;font-size:11px}.welcome-start{width:min(100%,300px)}}
 @media(prefers-reduced-motion:reduce){#app-shell,.welcome-start span{animation:none;transition:none}}
+
+
+/* Welcome-first application flow */
+[hidden]{display:none!important}
+.welcome-screen{position:relative;isolation:isolate;display:grid;place-items:center;min-height:100svh;overflow:hidden;padding:26px 18px;background:radial-gradient(ellipse at 50% 0%,#29224f 0,transparent 56%),var(--bg)}
+.welcome-glow{position:absolute;z-index:-1;width:340px;height:340px;border-radius:50%;filter:blur(70px);opacity:.2;pointer-events:none}
+.welcome-glow-one{top:8%;left:-130px;background:#8e70ff}.welcome-glow-two{right:-150px;bottom:2%;background:#47cdb9}
+.welcome-card{width:min(100%,680px);padding:clamp(24px,6vw,54px);text-align:center;border:1px solid #a99bff35;border-radius:30px;background:linear-gradient(145deg,#171a2beF,#101321f5);box-shadow:0 28px 100px #0004,inset 0 1px #ffffff0c}
+.welcome-brand{display:flex;align-items:center;justify-content:center;gap:12px;font-size:23px;font-weight:850;letter-spacing:-.7px;margin-bottom:30px}
+.welcome-brand .brand-mark{width:46px;height:46px;font-size:23px;border-radius:15px}
+.welcome-badge{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #a99bff2b;border-radius:999px;color:var(--muted);font-size:10px;letter-spacing:1.35px;font-weight:750}
+.welcome-card h1{max-width:570px;margin:25px auto 15px;font-size:clamp(35px,7vw,61px);line-height:1.05;letter-spacing:-2.7px}
+.welcome-card h1 span{display:block;color:var(--accent)}
+.welcome-card>p{max-width:470px;margin:0 auto;color:var(--muted);font-size:15px;line-height:1.8}
+.welcome-features{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:25px 0 28px}
+.welcome-features span{padding:9px 13px;border:1px solid var(--line);border-radius:999px;color:var(--text);background:var(--panel2);font-size:12px}
+.welcome-start{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,280px);min-height:56px;margin:0 auto;border-radius:15px;font-size:16px;font-weight:800;box-shadow:0 10px 30px #a99bff24}
+.welcome-start span{font-size:22px;transition:transform .18s}.welcome-start:hover span{transform:translateX(4px)}
+.welcome-theme{margin-top:17px}
+.welcome-card>small{display:block;max-width:420px;margin:25px auto 0;color:var(--muted);font-size:10px;line-height:1.7}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 11px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--text);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .18s,border-color .18s}
+.theme-toggle:hover{border-color:var(--accent);background:var(--panel2)}
+.header-actions{gap:10px}
+.header-theme{font-size:10px}
+@media(max-width:640px){.welcome-screen{padding:18px 14px}.welcome-card{padding:28px 20px;border-radius:24px}.welcome-brand{margin-bottom:25px}.welcome-card h1{letter-spacing:-1.6px;margin-top:22px}.welcome-card>p{font-size:14px}.welcome-features{gap:7px;margin:22px 0}.welcome-features span{padding:8px 10px}.welcome-card>small{margin-top:20px}.header-actions{gap:7px}.header-theme{max-width:118px;padding:7px 8px;font-size:10px}.privacy-pill{display:none}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f4f6fb;--panel:#ffffff;--panel2:#eef1f8;--line:#dce1ed;--text:#202438;--muted:#626b82;--accent:#6551d8;--accent2:#078f7d;--danger:#c43b61;--surface:#ffffff}
+:root[data-theme="light"] body{background:radial-gradient(ellipse at 50% -15%,#e4e0ff 0,transparent 47%),var(--bg);color:var(--text)}
+:root[data-theme="light"] .welcome-screen{background:radial-gradient(ellipse at 50% 0%,#e5e1ff 0,transparent 56%),var(--bg)}
+:root[data-theme="light"] .welcome-card{background:linear-gradient(145deg,#fff,#f8f9ff);border-color:#d9d4ff;box-shadow:0 28px 80px #30385b12,inset 0 1px #ffffff}
+:root[data-theme="light"] .topbar{border-bottom-color:#20243812}
+:root[data-theme="light"] .tool-menu{background:#1c23345c}
+:root[data-theme="light"] .menu-drawer{background:linear-gradient(180deg,#fff 0%,var(--bg) 260px);border-left-color:var(--line)}
+:root[data-theme="light"] .menu-search{background:#fff;border-color:var(--line);color:var(--text)}
+:root[data-theme="light"] .menu-search-label{color:var(--text)}
+:root[data-theme="light"] .menu-item-row:hover{background:#6551d80b}
+:root[data-theme="light"] .menu-quick-section{background:linear-gradient(145deg,#6551d80b,#078f7d06);border-color:#6551d825}
+:root[data-theme="light"] .menu-tool-icon{border-color:#6551d825;background:linear-gradient(145deg,#6551d812,#078f7d09);color:var(--accent)}
+:root[data-theme="light"] .menu-filter.active{background:#6551d812}
+:root[data-theme="light"] .editor-code-card,:root[data-theme="light"] .editor-preview-card{background:#fff}
+:root[data-theme="light"] .editor-preview-card iframe{background:#fff}
+:root[data-theme="light"] .adv-code,:root[data-theme="light"] .tool-panel textarea,:root[data-theme="light"] .tool-panel input,:root[data-theme="light"] .tool-panel select,:root[data-theme="light"] .advanced-panel textarea,:root[data-theme="light"] .advanced-panel input,:root[data-theme="light"] .advanced-panel select{background:#fff;color:#202438;border-color:#dce1ed}
+:root[data-theme="light"] .btn{background:#fff;color:#202438;border-color:#dce1ed}
+:root[data-theme="light"] .btn.primary{background:#6551d8;color:#fff;border-color:#6551d8}
+:root[data-theme="light"] .workspace,:root[data-theme="light"] .advanced-workspace,:root[data-theme="light"] .feature-grid article{background:#fff;border-color:var(--line);box-shadow:0 8px 28px #30385b08}
+:root[data-theme="light"] .stat,:root[data-theme="light"] .result-box,:root[data-theme="light"] .editor-code-card,:root[data-theme="light"] .editor-preview-card{background:#f8f9fd;border-color:var(--line)}
+:root[data-theme="light"] .hero-meta span{background:#ffffffa6;border-color:#20243810}
+:root[data-theme="light"] .menu-footer{border-top-color:var(--line)}
+@media(prefers-reduced-motion:reduce){.welcome-start span{transition:none}}
