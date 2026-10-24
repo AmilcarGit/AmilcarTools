@@ -143,9 +143,9 @@ test('el editor para programadores incluye vista en vivo, atajos, copia y export
   const css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8');
   const readme=fs.readFileSync(path.join(root,'README.md'),'utf8');
   const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
-  for(const id of ['editor-live','adv-html','adv-css','adv-js','adv-preview','editor-preview-status','editor-search','editor-line-count','editor-diagnostics'])assert.ok(js.includes(id),'Falta control '+id);
+  for(const id of ['editor-live','adv-html','adv-css','adv-js','adv-preview','editor-preview-status','editor-search','editor-line-count','editor-diagnostics','lines-adv-html','lines-adv-css','lines-adv-js'])assert.ok(js.includes(id),'Falta control '+id);
   for(const action of ['editor-run','editor-reset','editor-download','editor-copy-html','editor-copy-css','editor-copy-js'])assert.ok(js.includes(action),'Falta acción '+action);
-  assert.match(js,/setTimeout\(runPreview,280\)/);assert.match(js,/function updateEditorMeta\(\)/);assert.match(js,/new Function\(values\[2\]\)/);assert.match(js,/data-editor-find/);
+  assert.match(js,/setTimeout\(runPreview,280\)/);assert.match(js,/function updateEditorMeta\(\)/);assert.match(js,/lines-\x27\+id/);assert.match(js,/gutter\.scrollTop=target\.scrollTop/);assert.match(js,/new Function\(values\[2\]\)/);assert.match(js,/data-editor-find/);
   assert.match(js,/event\.key==='Tab'/);
   assert.match(js,/event\.ctrlKey\|\|event\.metaKey/);
   assert.match(js,/proyecto-amilcartools\.html/);
