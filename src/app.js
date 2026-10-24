@@ -188,7 +188,11 @@ function applyTheme(theme) {
   const selected = theme === 'light' ? 'light' : 'dark';
   document.documentElement.dataset.theme = selected;
   document.querySelectorAll('[data-theme-toggle]').forEach(button => {
-    button.textContent = selected === 'light' ? '🌙 Modo oscuro' : '☀️ Luz blanca';
+    if (button.id === 'theme-toggle') {
+      button.innerHTML = selected === 'light' ? '<span aria-hidden="true">☾</span><span class="theme-toggle-label">Modo oscuro</span>' : '<span aria-hidden="true">☼</span><span class="theme-toggle-label">Luz blanca</span>';
+    } else {
+      button.textContent = selected === 'light' ? '🌙 Modo oscuro' : '☀️ Luz blanca';
+    }
     button.setAttribute('aria-label', selected === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a luz blanca');
     button.setAttribute('aria-pressed', String(selected === 'light'));
   });
